@@ -1,0 +1,9 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="screenshareav.Views.RemoteControlView">
+  <StackPanel Margin="32">
+    <TextBlock Text="Remote Control" FontWeight="Bold" FontSize="18"/>
+    <TextBlock Text="Enable or disable remote mouse/keyboard control." Margin="0,8,0,0"/>
+    <ToggleSwitch x:Name="RemoteControlToggle" Content="Allow Remote Control"/>
+  </StackPanel>
+</UserControl>

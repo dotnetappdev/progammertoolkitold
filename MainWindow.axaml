@@ -1,0 +1,89 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:screenshareav.Views"
+        x:Class="screenshareav.MainWindow"
+        Width="1100" Height="750"
+        Title="Programmers Toolkit"
+        Background="#F3F3F3"
+        mc:Ignorable="d">
+      <Window.Resources>
+        <!-- System/Windows Theme (default) -->
+        <Color x:Key="AccentColor">#2563eb</Color>
+        <Color x:Key="BackgroundColor">#ffffff</Color>
+        <Color x:Key="SidebarColor">#f3f6fc</Color>
+        <Color x:Key="ButtonColor">#e5eaf5</Color>
+        <Color x:Key="ButtonHoverColor">#dbeafe</Color>
+        <Color x:Key="TextColor">#1a1a1a</Color>
+        <!-- Light Theme -->
+        <Color x:Key="AccentColorLight">#2563eb</Color>
+        <Color x:Key="BackgroundColorLight">#ffffff</Color>
+        <Color x:Key="SidebarColorLight">#f3f6fc</Color>
+        <Color x:Key="ButtonColorLight">#e5eaf5</Color>
+        <Color x:Key="ButtonHoverColorLight">#dbeafe</Color>
+        <Color x:Key="TextColorLight">#1a1a1a</Color>
+        <!-- Dark Theme -->
+        <Color x:Key="AccentColorDark">#2563eb</Color>
+        <Color x:Key="BackgroundColorDark">#181a20</Color>
+        <Color x:Key="SidebarColorDark">#23272f</Color>
+        <Color x:Key="ButtonColorDark">#232b3b</Color>
+        <Color x:Key="ButtonHoverColorDark">#2563eb</Color>
+        <Color x:Key="TextColorDark">#e5eaf5</Color>
+        <!-- Global Font Resources -->
+        <x:String x:Key="FontFamily">Segoe UI, Arial, sans-serif</x:String>
+        <x:Double x:Key="FontSize">15</x:Double>
+        <x:Double x:Key="FontSizeLarge">18</x:Double>
+        <x:Double x:Key="FontSizeTitle">20</x:Double>
+      </Window.Resources>
+      <Window.Styles>
+        <FluentTheme />
+        <Style Selector="Window">
+          <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
+          <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+          <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+        </Style>
+        <Style Selector="TextBlock">
+          <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+          <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+          <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+        </Style>
+        <Style Selector="Button">
+          <Setter Property="Background" Value="{DynamicResource ButtonColor}"/>
+          <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+          <Setter Property="CornerRadius" Value="8"/>
+          <Setter Property="FontWeight" Value="SemiBold"/>
+          <Setter Property="Padding" Value="10,4"/>
+          <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+          <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+        </Style>
+        <Style Selector="Button:pointerover">
+          <Setter Property="Background" Value="{DynamicResource ButtonHoverColor}"/>
+        </Style>
+        <Style Selector="ListBox">
+          <Setter Property="Background" Value="{DynamicResource SidebarColor}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource ButtonColor}"/>
+          <Setter Property="BorderThickness" Value="1"/>
+          <Setter Property="CornerRadius" Value="10"/>
+          <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+          <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+        </Style>
+        <Style Selector="ToggleSwitch">
+          <Setter Property="Background" Value="{DynamicResource ButtonColor}"/>
+          <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+          <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+          <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+        </Style>
+      </Window.Styles>
+      <Design.PreviewWith>
+        <views:MainView/>
+      </Design.PreviewWith>
+      <DockPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,24,0" Spacing="16" DockPanel.Dock="Top">
+          <RadioButton x:Name="SystemThemeRadio" Content="System" IsChecked="True" GroupName="ThemeGroup"/>
+          <RadioButton x:Name="LightThemeRadio" Content="Light" GroupName="ThemeGroup"/>
+          <RadioButton x:Name="DarkThemeRadio" Content="Dark" GroupName="ThemeGroup"/>
+        </StackPanel>
+        <views:MainView/>
+      </DockPanel>
+    </Window>

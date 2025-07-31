@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="screenshareav.Views.MainView">
+  <DockPanel>
+    <!-- Sidebar -->
+    <StackPanel DockPanel.Dock="Left" Width="220" Background="#F3F3F3">
+      <TextBlock Text="ScreenShare  Control" FontWeight="Bold" FontSize="20" Margin="16"/>
+      <ListBox x:Name="Sidebar" SelectedIndex="0">
+        <ListBoxItem Content="General"/>
+        <ListBoxItem Content="Monitor Sharing"/>
+        <ListBoxItem Content="Remote Control"/>
+        <ListBoxItem Content="File Sharing"/>
+        <ListBoxItem Content="FTP Client"/>
+        <ListBoxItem>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Code Editor" Margin="8,0,0,0"/>
+          </StackPanel>
+        </ListBoxItem>
+        <ListBoxItem>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Encryption Tools" Margin="8,0,0,0"/>
+          </StackPanel>
+        </ListBoxItem>
+        <ListBoxItem Content="RDP"/>
+        <ListBoxItem Content="Settings"/>
+      </ListBox>
+      <ToggleSwitch Content="Dark Mode" Margin="16,32,16,0"/>
+    </StackPanel>
+    <!-- Main Content -->
+    <ContentControl x:Name="MainContent"/>
+  </DockPanel>
+</UserControl>

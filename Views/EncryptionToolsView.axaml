@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="screenshareav.Views.EncryptionToolsView">
+  <StackPanel Margin="32" Spacing="12">
+    <TextBlock Text="Encryption Tools" FontWeight="Bold" FontSize="18"/>
+    <TextBlock Text="Encryption" FontStyle="Italic"/>
+    <Expander Header="JWT Token Decoder">
+      <StackPanel>
+        <TextBox x:Name="JwtInput" Watermark="Paste JWT token here..." AcceptsReturn="True" Height="60"/>
+        <Button x:Name="DecodeJwtBtn" Content="Decode" Width="100"/>
+        <TextBlock x:Name="JwtDecoded" TextWrapping="Wrap"/>
+      </StackPanel>
+    </Expander>
+    <Expander Header="Hash Generator (SHA256, MD5, etc)">
+      <StackPanel>
+        <TextBox x:Name="HashInput" Watermark="Enter text..."/>
+        <ComboBox x:Name="HashAlgoCombo" Width="120">
+          <ComboBoxItem Content="SHA256"/>
+          <ComboBoxItem Content="MD5"/>
+        </ComboBox>
+        <Button x:Name="HashBtn" Content="Hash" Width="80"/>
+        <TextBlock x:Name="HashResult"/>
+      </StackPanel>
+    </Expander>
+    <Expander Header="Encryption/Decryption (AES, XOR, etc)">
+      <StackPanel>
+        <TextBox x:Name="EncryptInput" Watermark="Enter text..."/>
+        <TextBox x:Name="EncryptKey" Watermark="Key..."/>
+        <Button x:Name="AesEncryptBtn" Content="AES Encrypt" Width="120"/>
+        <Button x:Name="AesDecryptBtn" Content="AES Decrypt" Width="120"/>
+        <TextBlock x:Name="EncryptResult"/>
+      </StackPanel>
+    </Expander>
+    <TextBlock Text="Descriptions and best practices for JWT, hashing, and encryption are shown in tooltips and below." Margin="0,16,0,0"/>
+    <TextBlock Text="- JWT: JSON Web Tokens are used for stateless authentication. Header.Payload.Signature.\n- Hashing: One-way, for integrity.\n- Encryption: Two-way, for confidentiality."/>
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,18 @@
+<!-- This file is now the FTP Client view, previously FileZillaView -->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="screenshareav.Views.FtpClientView">
+  <StackPanel Margin="32" Spacing="12">
+    <TextBlock Text="FTP Client" FontWeight="Bold" FontSize="18"/>
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <TextBox x:Name="HostTextBox" Watermark="Host/IP" Width="160"/>
+      <TextBox x:Name="UserTextBox" Watermark="Username" Width="120"/>
+      <TextBox x:Name="PasswordTextBox" Watermark="Password" Width="120" PasswordChar="*"/>
+      <Button x:Name="ConnectBtn" Content="Connect" Width="100"/>
+    </StackPanel>
+    <TextBlock Text="Remote Files" FontWeight="SemiBold" Margin="0,16,0,0"/>
+    <ListBox x:Name="RemoteFilesList" Height="180"/>
+    <Button x:Name="DownloadBtn" Content="Download Selected" Width="160"/>
+    <Button x:Name="UploadBtn" Content="Upload File" Width="120"/>
+  </StackPanel>
+</UserControl>

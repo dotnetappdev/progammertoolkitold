@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="screenshareav.Views.CodeEditorView">
+  <StackPanel Margin="32" Spacing="12">
+    <TextBlock Text="Code Editor" FontWeight="Bold" FontSize="18"/>
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <ComboBox x:Name="LanguageCombo" Width="120" SelectedIndex="0">
+        <ComboBoxItem Content="C#"/>
+        <ComboBoxItem Content="Python"/>
+        <ComboBoxItem Content="JavaScript"/>
+        <ComboBoxItem Content="HTML"/>
+        <ComboBoxItem Content="JSON"/>
+      </ComboBox>
+      <ComboBox x:Name="EncodingCombo" Width="100">
+        <ComboBoxItem Content="UTF-8"/>
+        <ComboBoxItem Content="UTF-16"/>
+        <ComboBoxItem Content="UTF-32"/>
+      </ComboBox>
+      <CheckBox x:Name="ShowHiddenChars" Content="Show Hidden"/>
+      <Button x:Name="OpenFileBtn" Content="Open File..." Width="100"/>
+      <Button x:Name="SaveFileBtn" Content="Save" Width="80"/>
+      <Button x:Name="RunBtn" Content="Run" Width="80"/>
+    </StackPanel>
+    <TextBlock x:Name="EditorStatus" Foreground="Gray"/>
+    <!-- Monaco/AvaloniaEdit editor integration placeholder -->
+    <Border Height="320" Background="#1e1e1e" CornerRadius="8" Margin="0,8,0,0">
+      <TextBlock Text="[Code Editor Here]" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Border>
+    <Border Margin="0,12,0,0" Background="#222" CornerRadius="8" Padding="8">
+      <StackPanel>
+        <TextBlock Text="Output" Foreground="#aaa" FontWeight="Bold" Margin="0,0,0,4"/>
+        <TextBox x:Name="OutputBox" Height="100" IsReadOnly="True" AcceptsReturn="True" Background="#181818" Foreground="Lime" FontFamily="Consolas"/>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>
