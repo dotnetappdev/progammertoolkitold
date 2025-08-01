@@ -2,36 +2,146 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="screenshareav.Views.EncryptionToolsView">
   <StackPanel Margin="32" Spacing="12">
-    <TextBlock Text="Encryption Tools" FontWeight="Bold" FontSize="18"/>
-    <TextBlock Text="Encryption" FontStyle="Italic"/>
-    <Expander Header="JWT Token Decoder">
+    <!-- Header with Ethical Warning -->
+    <TextBlock Text="Security &amp; Penetration Testing Tools" FontWeight="Bold" FontSize="18"/>
+    <Border Background="#FFF3CD" BorderBrush="#FFEAA7" BorderThickness="1" CornerRadius="4" Padding="12">
       <StackPanel>
+        <TextBlock Text="⚠️ ETHICAL USAGE WARNING" FontWeight="Bold" Foreground="#856404"/>
+        <TextBlock Text="These tools are for educational and authorized penetration testing only. Always obtain proper authorization before testing any systems you do not own. Unauthorized use may violate laws and regulations." 
+                   TextWrapping="Wrap" Foreground="#856404" FontSize="12"/>
+      </StackPanel>
+    </Border>
+    
+    <!-- JWT Token Decoder -->
+    <Expander Header="JWT Token Decoder &amp; Analyzer">
+      <StackPanel Spacing="8">
         <TextBox x:Name="JwtInput" Watermark="Paste JWT token here..." AcceptsReturn="True" Height="60"/>
-        <Button x:Name="DecodeJwtBtn" Content="Decode" Width="100"/>
-        <TextBlock x:Name="JwtDecoded" TextWrapping="Wrap"/>
+        <Button x:Name="DecodeJwtBtn" Content="Decode &amp; Analyze" Width="140"/>
+        <ScrollViewer Height="150">
+          <TextBlock x:Name="JwtDecoded" TextWrapping="Wrap" FontFamily="Consolas"/>
+        </ScrollViewer>
       </StackPanel>
     </Expander>
-    <Expander Header="Hash Generator (SHA256, MD5, etc)">
-      <StackPanel>
-        <TextBox x:Name="HashInput" Watermark="Enter text..."/>
-        <ComboBox x:Name="HashAlgoCombo" Width="120">
-          <ComboBoxItem Content="SHA256"/>
-          <ComboBoxItem Content="MD5"/>
-        </ComboBox>
-        <Button x:Name="HashBtn" Content="Hash" Width="80"/>
-        <TextBlock x:Name="HashResult"/>
+    
+    <!-- Advanced Hash Generator -->
+    <Expander Header="Advanced Hash Generator">
+      <StackPanel Spacing="8">
+        <TextBox x:Name="HashInput" Watermark="Enter text to hash..."/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <ComboBox x:Name="HashAlgoCombo" Width="120" SelectedIndex="0">
+            <ComboBoxItem Content="SHA256"/>
+            <ComboBoxItem Content="SHA1"/>
+            <ComboBoxItem Content="SHA512"/>
+            <ComboBoxItem Content="MD5"/>
+          </ComboBox>
+          <Button x:Name="HashBtn" Content="Generate Hash" Width="120"/>
+          <Button x:Name="CopyHashBtn" Content="Copy" Width="60"/>
+        </StackPanel>
+        <TextBox x:Name="HashResult" IsReadOnly="True" FontFamily="Consolas"/>
       </StackPanel>
     </Expander>
-    <Expander Header="Encryption/Decryption (AES, XOR, etc)">
-      <StackPanel>
-        <TextBox x:Name="EncryptInput" Watermark="Enter text..."/>
-        <TextBox x:Name="EncryptKey" Watermark="Key..."/>
-        <Button x:Name="AesEncryptBtn" Content="AES Encrypt" Width="120"/>
-        <Button x:Name="AesDecryptBtn" Content="AES Decrypt" Width="120"/>
-        <TextBlock x:Name="EncryptResult"/>
+    
+    <!-- Password Security Tools -->
+    <Expander Header="Password Security Tools">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Password Strength Analyzer" FontWeight="SemiBold"/>
+        <TextBox x:Name="PasswordInput" Watermark="Enter password to analyze..."/>
+        <Button x:Name="AnalyzePasswordBtn" Content="Analyze Strength" Width="140"/>
+        <TextBlock x:Name="PasswordStrengthResult" TextWrapping="Wrap"/>
+        
+        <Separator Margin="0,12"/>
+        
+        <TextBlock Text="Secure Password Generator" FontWeight="SemiBold"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Length:" VerticalAlignment="Center"/>
+          <TextBox x:Name="PasswordLengthInput" Width="60" Text="16"/>
+          <CheckBox x:Name="IncludeUppercase" Content="Uppercase" IsChecked="True"/>
+          <CheckBox x:Name="IncludeLowercase" Content="Lowercase" IsChecked="True"/>
+          <CheckBox x:Name="IncludeNumbers" Content="Numbers" IsChecked="True"/>
+          <CheckBox x:Name="IncludeSymbols" Content="Symbols" IsChecked="True"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="GeneratePasswordBtn" Content="Generate Password" Width="140"/>
+          <Button x:Name="CopyPasswordBtn" Content="Copy" Width="60"/>
+        </StackPanel>
+        <TextBox x:Name="GeneratedPassword" IsReadOnly="True" FontFamily="Consolas"/>
       </StackPanel>
     </Expander>
-    <TextBlock Text="Descriptions and best practices for JWT, hashing, and encryption are shown in tooltips and below." Margin="0,16,0,0"/>
-    <TextBlock Text="- JWT: JSON Web Tokens are used for stateless authentication. Header.Payload.Signature.\n- Hashing: One-way, for integrity.\n- Encryption: Two-way, for confidentiality."/>
+    
+    <!-- Encoding/Decoding Utilities -->
+    <Expander Header="Encoding &amp; Decoding Utilities">
+      <StackPanel Spacing="8">
+        <TextBox x:Name="EncodingInput" Watermark="Enter text to encode/decode..." AcceptsReturn="True" Height="80"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="Base64EncodeBtn" Content="Base64 Encode" Width="120"/>
+          <Button x:Name="Base64DecodeBtn" Content="Base64 Decode" Width="120"/>
+          <Button x:Name="UrlEncodeBtn" Content="URL Encode" Width="100"/>
+          <Button x:Name="UrlDecodeBtn" Content="URL Decode" Width="100"/>
+        </StackPanel>
+        <TextBox x:Name="EncodingResult" IsReadOnly="True" AcceptsReturn="True" Height="80" FontFamily="Consolas"/>
+      </StackPanel>
+    </Expander>
+    
+    <!-- Network Security Tools -->
+    <Expander Header="Network Security Tools">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Port Scanner" FontWeight="SemiBold"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBox x:Name="ScanTargetInput" Watermark="Target IP/hostname" Width="150"/>
+          <TextBox x:Name="StartPortInput" Watermark="Start port" Width="80" Text="80"/>
+          <TextBox x:Name="EndPortInput" Watermark="End port" Width="80" Text="443"/>
+          <Button x:Name="ScanPortsBtn" Content="Scan Ports" Width="100"/>
+        </StackPanel>
+        <ScrollViewer Height="120">
+          <TextBlock x:Name="PortScanResults" TextWrapping="Wrap" FontFamily="Consolas"/>
+        </ScrollViewer>
+      </StackPanel>
+    </Expander>
+    
+    <!-- Payload Generators -->
+    <Expander Header="Payload Generators (Educational)">
+      <StackPanel Spacing="8">
+        <Border Background="#F8D7DA" BorderBrush="#F5C6CB" BorderThickness="1" CornerRadius="4" Padding="8">
+          <TextBlock Text="⚠️ For authorized testing only. These payloads are for educational purposes and penetration testing with proper authorization." 
+                     TextWrapping="Wrap" Foreground="#721C24" FontSize="11"/>
+        </Border>
+        
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="SqlInjectionBtn" Content="SQL Injection Payloads" Width="160"/>
+          <Button x:Name="XssPayloadsBtn" Content="XSS Payloads" Width="120"/>
+          <Button x:Name="ClearPayloadsBtn" Content="Clear" Width="60"/>
+        </StackPanel>
+        <ScrollViewer Height="150">
+          <TextBox x:Name="PayloadResults" AcceptsReturn="True" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas"/>
+        </ScrollViewer>
+      </StackPanel>
+    </Expander>
+    
+    <!-- Encryption/Decryption -->
+    <Expander Header="Encryption/Decryption (AES)">
+      <StackPanel Spacing="8">
+        <TextBox x:Name="EncryptInput" Watermark="Enter text to encrypt/decrypt..." AcceptsReturn="True" Height="60"/>
+        <TextBox x:Name="EncryptKey" Watermark="Encryption key (32 characters max)..." />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="AesEncryptBtn" Content="AES Encrypt" Width="120"/>
+          <Button x:Name="AesDecryptBtn" Content="AES Decrypt" Width="120"/>
+        </StackPanel>
+        <TextBox x:Name="EncryptResult" IsReadOnly="True" AcceptsReturn="True" Height="60" FontFamily="Consolas"/>
+      </StackPanel>
+    </Expander>
+    
+    <!-- Information and Best Practices -->
+    <Expander Header="Security Information &amp; Best Practices">
+      <ScrollViewer Height="200">
+        <StackPanel Spacing="8">
+          <TextBlock Text="• JWT Security: Always verify signatures, check expiration, validate claims" TextWrapping="Wrap"/>
+          <TextBlock Text="• Hashing: Use SHA-256 or better for integrity checks, never for passwords (use bcrypt/scrypt)" TextWrapping="Wrap"/>
+          <TextBlock Text="• Passwords: Minimum 12 characters, use unique passwords, enable 2FA when possible" TextWrapping="Wrap"/>
+          <TextBlock Text="• Encoding: Base64 is NOT encryption, URL encoding prevents injection" TextWrapping="Wrap"/>
+          <TextBlock Text="• Network Scanning: Only scan networks you own or have permission to test" TextWrapping="Wrap"/>
+          <TextBlock Text="• Responsible Disclosure: Report vulnerabilities to vendors through proper channels" TextWrapping="Wrap"/>
+        </StackPanel>
+      </ScrollViewer>
+    </Expander>
   </StackPanel>
 </UserControl>
