@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Platform.Storage;
 using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
 using System;
@@ -10,6 +11,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using screenshareav.Database;
 
 namespace screenshareav.Views
@@ -433,14 +435,200 @@ namespace screenshareav.Views
         }
 
         // HTTP File operations
-        private void ImportHttpFileBtn_Click(object? sender, RoutedEventArgs e)
+        private async void ImportHttpFileBtn_Click(object? sender, RoutedEventArgs e)
         {
-            // Implementation for importing .http files
+            try
+            {
+                var topLevel = TopLevel.GetTopLevel(this);
+                if (topLevel?.StorageProvider == null) return;
+
+                var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                {
+                    Title = "Import .http File",
+                    AllowMultiple = false,
+                    FileTypeFilter = new[]
+                    {
+                        new FilePickerFileType("HTTP Files") { Patterns = new[] { "*.http" } },
+                        new FilePickerFileType("All Files") { Patterns = new[] { "*.*" } }
+                    }
+                });
+
+                if (files.Count > 0)
+                {
+                    using var stream = await files[0].OpenReadAsync();
+                    using var reader = new StreamReader(stream);
+                    var content = await reader.ReadToEndAsync();
+                    ParseHttpFile(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle error - could show a message box or status
+            }
         }
 
-        private void ExportHttpFileBtn_Click(object? sender, RoutedEventArgs e)
+        private async void ExportHttpFileBtn_Click(object? sender, RoutedEventArgs e)
         {
-            // Implementation for exporting .http files
+            try
+            {
+                var topLevel = TopLevel.GetTopLevel(this);
+                if (topLevel?.StorageProvider == null) return;
+
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+                {
+                    Title = "Export .http File",
+                    DefaultExtension = "http",
+                    FileTypeChoices = new[]
+                    {
+                        new FilePickerFileType("HTTP Files") { Patterns = new[] { "*.http" } },
+                        new FilePickerFileType("All Files") { Patterns = new[] { "*.*" } }
+                    },
+                    SuggestedFileName = "api-test.http"
+                });
+
+                if (file != null)
+                {
+                    var httpContent = GenerateHttpFileContent();
+                    using var stream = await file.OpenWriteAsync();
+                    using var writer = new StreamWriter(stream);
+                    await writer.WriteAsync(httpContent);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+        }
+
+        private void ParseHttpFile(string content)
+        {
+            try
+            {
+                var lines = content.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+                if (lines.Length == 0) return;
+
+                string? method = null;
+                string? url = null;
+                var headers = new Dictionary<string, string>();
+                var bodyLines = new List<string>();
+                bool inBody = false;
+
+                foreach (var line in lines)
+                {
+                    var trimmedLine = line.Trim();
+                    
+                    // Skip comments
+                    if (trimmedLine.StartsWith("#") || trimmedLine.StartsWith("//"))
+                        continue;
+
+                    // Parse HTTP method and URL (first line)
+                    if (method == null && url == null && trimmedLine.Contains(' '))
+                    {
+                        var parts = trimmedLine.Split(' ', 2);
+                        if (parts.Length == 2)
+                        {
+                            method = parts[0].Trim().ToUpper();
+                            url = parts[1].Trim();
+                        }
+                        continue;
+                    }
+
+                    // Parse headers
+                    if (!inBody && trimmedLine.Contains(':'))
+                    {
+                        var colonIndex = trimmedLine.IndexOf(':');
+                        var headerName = trimmedLine[..colonIndex].Trim();
+                        var headerValue = trimmedLine[(colonIndex + 1)..].Trim();
+                        headers[headerName] = headerValue;
+                        continue;
+                    }
+
+                    // Empty line indicates start of body
+                    if (string.IsNullOrWhiteSpace(trimmedLine) && !inBody && headers.Count > 0)
+                    {
+                        inBody = true;
+                        continue;
+                    }
+
+                    // Body content
+                    if (inBody)
+                    {
+                        bodyLines.Add(line);
+                    }
+                }
+
+                // Apply parsed data to UI
+                if (!string.IsNullOrEmpty(method) && _httpMethodCombo != null)
+                {
+                    var methodIndex = method switch
+                    {
+                        "GET" => 0,
+                        "POST" => 1,
+                        "PUT" => 2,
+                        "DELETE" => 3,
+                        "PATCH" => 4,
+                        "HEAD" => 5,
+                        "OPTIONS" => 6,
+                        _ => 0
+                    };
+                    _httpMethodCombo.SelectedIndex = methodIndex;
+                }
+
+                if (!string.IsNullOrEmpty(url) && _urlTextBox != null)
+                {
+                    _urlTextBox.Text = url;
+                }
+
+                // Apply headers
+                _requestHeaders.Clear();
+                foreach (var header in headers)
+                {
+                    _requestHeaders[header.Key] = header.Value;
+                }
+                RefreshHeadersList();
+
+                // Apply body
+                if (bodyLines.Count > 0 && _requestBodyTextBox != null)
+                {
+                    _requestBodyTextBox.Text = string.Join('\n', bodyLines);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle parsing error
+            }
+        }
+
+        private string GenerateHttpFileContent()
+        {
+            var sb = new StringBuilder();
+            
+            // Add comment header
+            sb.AppendLine("# Generated by Programmer's Toolkit API Testing Suite");
+            sb.AppendLine($"# Generated on: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            sb.AppendLine();
+
+            // Add method and URL
+            var method = GetSelectedHttpMethod().Method.ToUpper();
+            var url = _urlTextBox?.Text?.Trim() ?? "https://api.example.com/endpoint";
+            sb.AppendLine($"{method} {url}");
+
+            // Add headers
+            foreach (var header in _requestHeaders)
+            {
+                sb.AppendLine($"{header.Key}: {header.Value}");
+            }
+
+            // Add body if present
+            var body = _requestBodyTextBox?.Text?.Trim();
+            if (!string.IsNullOrWhiteSpace(body) && 
+                (method == "POST" || method == "PUT" || method == "PATCH"))
+            {
+                sb.AppendLine();
+                sb.AppendLine(body);
+            }
+
+            return sb.ToString();
         }
     }
 }
