@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="ProgrammersToolKit.Views.ApiTesterView_Extended">
+             x:Class="ProgrammersToolKit.Views.ApiTesterView_Extended"
+             x:CompileBindings="False">
   <DockPanel Margin="24">
     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,0,0,12">
       <TextBlock Text="API Tester (Extended)" FontWeight="Bold" FontSize="20"/>
