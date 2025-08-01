@@ -1,0 +1,139 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="screenshareav.Views.ApiTestView">
+  <ScrollViewer>
+    <StackPanel Margin="16">
+      <TextBlock Text="API Testing" FontWeight="Bold" FontSize="24" Margin="0,0,0,16"/>
+      
+      <!-- HTTP Request Configuration -->
+      <Border Background="#F8F9FA" Padding="16" CornerRadius="8" Margin="0,0,0,16">
+        <StackPanel>
+          <TextBlock Text="HTTP Request Configuration" FontWeight="Bold" FontSize="16" Margin="0,0,0,12"/>
+          
+          <!-- Method and URL -->
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="120"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            
+            <ComboBox Grid.Column="0" x:Name="MethodComboBox" SelectedIndex="0" Margin="0,0,8,0">
+              <ComboBoxItem Content="GET"/>
+              <ComboBoxItem Content="POST"/>
+              <ComboBoxItem Content="PUT"/>
+              <ComboBoxItem Content="DELETE"/>
+              <ComboBoxItem Content="PATCH"/>
+              <ComboBoxItem Content="HEAD"/>
+              <ComboBoxItem Content="OPTIONS"/>
+            </ComboBox>
+            
+            <TextBox Grid.Column="1" x:Name="UrlTextBox" Watermark="Enter API endpoint URL..." Margin="0,0,8,0"/>
+            
+            <Button Grid.Column="2" x:Name="SendButton" Content="Send" Click="SendButton_Click"/>
+          </Grid>
+          
+          <!-- Headers -->
+          <TextBlock Text="Headers" FontWeight="SemiBold" Margin="0,16,0,8"/>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" x:Name="HeaderKeyTextBox" Watermark="Header key" Margin="0,0,4,0"/>
+            <TextBox Grid.Column="1" x:Name="HeaderValueTextBox" Watermark="Header value" Margin="4,0,4,0"/>
+            <Button Grid.Column="2" x:Name="AddHeaderButton" Content="Add" Click="AddHeaderButton_Click" Margin="4,0,0,0"/>
+          </Grid>
+          <ListBox x:Name="HeadersList" Height="100" Margin="0,8,0,0"/>
+          
+          <!-- Request Body -->
+          <TextBlock Text="Request Body (JSON)" FontWeight="SemiBold" Margin="0,16,0,8"/>
+          <TextBox x:Name="RequestBodyTextBox" AcceptsReturn="True" TextWrapping="Wrap" Height="120" 
+                   Watermark="Enter JSON request body..."/>
+        </StackPanel>
+      </Border>
+      
+      <!-- Response and Testing -->
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Response Panel -->
+        <Border Grid.Column="0" Background="#F8F9FA" Padding="16" CornerRadius="8" Margin="0,0,8,0">
+          <StackPanel>
+            <TextBlock Text="Response" FontWeight="Bold" FontSize="16" Margin="0,0,0,12"/>
+            <TextBlock x:Name="StatusLabel" Text="Status: Not sent" Margin="0,0,0,8"/>
+            <TextBox x:Name="ResponseTextBox" AcceptsReturn="True" TextWrapping="Wrap" Height="300" 
+                     IsReadOnly="True" Watermark="Response will appear here..."/>
+          </StackPanel>
+        </Border>
+        
+        <!-- Test Cases Panel -->
+        <Border Grid.Column="1" Background="#F8F9FA" Padding="16" CornerRadius="8" Margin="8,0,0,0">
+          <StackPanel>
+            <TextBlock Text="Test Cases &amp; Assertions" FontWeight="Bold" FontSize="16" Margin="0,0,0,12"/>
+            
+            <!-- Expected Response -->
+            <TextBlock Text="Expected JSON Response:" FontWeight="SemiBold" Margin="0,0,0,4"/>
+            <TextBox x:Name="ExpectedResponseTextBox" AcceptsReturn="True" TextWrapping="Wrap" Height="120" 
+                     Watermark="Enter expected JSON response..."/>
+            
+            <!-- Status Code Test -->
+            <Grid Margin="0,8,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <TextBlock Grid.Column="0" Text="Expected Status:" VerticalAlignment="Center"/>
+              <TextBox Grid.Column="1" x:Name="ExpectedStatusTextBox" Text="200" Margin="8,0,0,0"/>
+            </Grid>
+            
+            <!-- Test Buttons -->
+            <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+              <Button x:Name="RunTestButton" Content="Run Test" Click="RunTestButton_Click" Margin="0,0,8,0"/>
+              <Button x:Name="SaveTestButton" Content="Save Test" Click="SaveTestButton_Click"/>
+            </StackPanel>
+            
+            <!-- Test Results -->
+            <TextBlock x:Name="TestResultsLabel" Text="Test Results:" FontWeight="SemiBold" Margin="0,16,0,4"/>
+            <TextBox x:Name="TestResultsTextBox" AcceptsReturn="True" TextWrapping="Wrap" Height="80" 
+                     IsReadOnly="True" Watermark="Test results will appear here..."/>
+          </StackPanel>
+        </Border>
+      </Grid>
+      
+      <!-- Saved Tests -->
+      <Border Background="#F8F9FA" Padding="16" CornerRadius="8" Margin="0,16,0,0">
+        <StackPanel>
+          <TextBlock Text="Saved API Tests" FontWeight="Bold" FontSize="16" Margin="0,0,0,12"/>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="100"/>
+              <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" x:Name="SavedTestsComboBox" Margin="0,0,8,0"/>
+            <Button Grid.Column="1" x:Name="LoadTestButton" Content="Load" Click="LoadTestButton_Click" Margin="0,0,4,0"/>
+            <Button Grid.Column="2" x:Name="DeleteTestButton" Content="Delete" Click="DeleteTestButton_Click" Margin="4,0,0,0"/>
+          </Grid>
+        </StackPanel>
+      </Border>
+      
+      <!-- HTTP File Support -->
+      <Border Background="#F8F9FA" Padding="16" CornerRadius="8" Margin="0,16,0,0">
+        <StackPanel>
+          <TextBlock Text="HTTP File Support (.http files)" FontWeight="Bold" FontSize="16" Margin="0,0,0,12"/>
+          <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+            <Button x:Name="LoadHttpFileButton" Content="Load .http File" Click="LoadHttpFileButton_Click" Margin="0,0,8,0"/>
+            <Button x:Name="SaveHttpFileButton" Content="Save as .http File" Click="SaveHttpFileButton_Click"/>
+          </StackPanel>
+          <TextBox x:Name="HttpFileContentTextBox" AcceptsReturn="True" TextWrapping="Wrap" Height="120" 
+                   Watermark="HTTP file content will appear here..."/>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

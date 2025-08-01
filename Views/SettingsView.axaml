@@ -2,7 +2,61 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="screenshareav.Views.SettingsView">
   <StackPanel Margin="32">
-    <TextBlock Text="Settings" FontWeight="Bold" FontSize="18"/>
-    <Button Content="Reset to Defaults" Width="180" Margin="0,12,0,0"/>
+    <TextBlock Text="Settings" FontWeight="Bold" FontSize="18" Margin="0,0,0,16"/>
+    
+    <!-- Theme Settings -->
+    <Border Background="#F8F9FA" Padding="16" CornerRadius="8" Margin="0,0,0,16">
+      <StackPanel>
+        <TextBlock Text="Theme Settings" FontWeight="Bold" FontSize="14" Margin="0,0,0,12"/>
+        
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          
+          <TextBlock Grid.Column="0" Text="Theme Mode:" VerticalAlignment="Center"/>
+          <ComboBox Grid.Column="1" x:Name="ThemeComboBox" SelectedIndex="0" SelectionChanged="ThemeComboBox_SelectionChanged">
+            <ComboBoxItem Content="System Default"/>
+            <ComboBoxItem Content="Light"/>
+            <ComboBoxItem Content="Dark"/>
+          </ComboBox>
+        </Grid>
+        
+        <TextBlock Text="Current theme will follow your system settings when 'System Default' is selected." 
+                   FontSize="12" Foreground="Gray" Margin="0,8,0,0"/>
+      </StackPanel>
+    </Border>
+    
+    <!-- Application Settings -->
+    <Border Background="#F8F9FA" Padding="16" CornerRadius="8" Margin="0,0,0,16">
+      <StackPanel>
+        <TextBlock Text="Application Settings" FontWeight="Bold" FontSize="14" Margin="0,0,0,12"/>
+        
+        <CheckBox x:Name="StartWithSystemCheckBox" Content="Start with system" Margin="0,0,0,8"/>
+        <CheckBox x:Name="MinimizeToTrayCheckBox" Content="Minimize to system tray" Margin="0,0,0,8"/>
+        <CheckBox x:Name="EnableLoggingCheckBox" Content="Enable debug logging" Margin="0,0,0,8"/>
+      </StackPanel>
+    </Border>
+    
+    <!-- Security Settings -->
+    <Border Background="#F8F9FA" Padding="16" CornerRadius="8" Margin="0,0,0,16">
+      <StackPanel>
+        <TextBlock Text="Security &amp; Penetration Testing" FontWeight="Bold" FontSize="14" Margin="0,0,0,12"/>
+        
+        <CheckBox x:Name="EnableEthicalHackingCheckBox" Content="Enable ethical hacking tools" Margin="0,0,0,8"/>
+        <CheckBox x:Name="EnablePenetrationTestingCheckBox" Content="Enable penetration testing features" Margin="0,0,0,8"/>
+        <CheckBox x:Name="LogSecurityEventsCheckBox" Content="Log security testing events" Margin="0,0,0,8"/>
+        
+        <TextBlock Text="⚠️ Use these features responsibly and only on systems you own or have explicit permission to test." 
+                   FontSize="12" Foreground="Orange" Margin="0,8,0,0" TextWrapping="Wrap"/>
+      </StackPanel>
+    </Border>
+    
+    <!-- Action Buttons -->
+    <StackPanel Orientation="Horizontal">
+      <Button x:Name="SaveSettingsButton" Content="Save Settings" Click="SaveSettingsButton_Click" Margin="0,0,8,0"/>
+      <Button x:Name="ResetButton" Content="Reset to Defaults" Click="ResetButton_Click"/>
+    </StackPanel>
   </StackPanel>
 </UserControl>
