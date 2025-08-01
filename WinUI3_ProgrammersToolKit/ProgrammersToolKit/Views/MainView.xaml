@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="ProgrammersToolKit.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="#F3F3F3">
+            <StackPanel>
+                <TextBlock Text="ScreenShare Control" FontWeight="Bold" FontSize="20" Margin="16"/>
+                
+                <ListView x:Name="Sidebar" SelectedIndex="0" Margin="8">
+                    <ListView.Items>
+                        <ListViewItem Content="General"/>
+                        <ListViewItem Content="Monitor Sharing"/>
+                        <ListViewItem Content="Remote Control"/>
+                        <ListViewItem Content="File Sharing"/>
+                        <ListViewItem Content="FTP Client"/>
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Code Editor" Margin="8,0,0,0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Encryption Tools" Margin="8,0,0,0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Content="RDP"/>
+                        <ListViewItem Content="API Tester"/>
+                        <ListViewItem Content="JSON Query/Visualizer"/>
+                        <ListViewItem Content="Diff Editor"/>
+                        <ListViewItem Content="Notepad"/>
+                        <ListViewItem Content="CTF Tools"/>
+                        <ListViewItem Content="Text Stripper"/>
+                        <ListViewItem Content="Settings"/>
+                    </ListView.Items>
+                </ListView>
+                
+                <StackPanel Margin="0,24,0,0" Spacing="6">
+                    <TextBlock Text="Capture The Flag Tools" FontWeight="Bold" FontSize="15" Margin="8,0,0,0"/>
+                    <Button Name="SidebarInspectHeadersBtn" Content="Inspect Last HTTP Response Headers" Height="32" Margin="8,0,8,0"/>
+                    <Button Name="SidebarJwtDecodeBtn" Content="Decode JWT Token" Height="32" Margin="8,0,8,0"/>
+                    <Button Name="SidebarHashCrackBtn" Content="Hash/Crack Tool (Stub)" Height="32" Margin="8,0,8,0"/>
+                    <Button Name="SidebarCookieDecodeBtn" Content="Cookie/Claims Decoder" Height="32" Margin="8,0,8,0"/>
+                </StackPanel>
+                
+                <ToggleSwitch Content="Dark Mode" Margin="16,32,16,0"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- Main Content -->
+        <ContentPresenter x:Name="MainContent" Grid.Column="1"/>
+    </Grid>
+</UserControl>

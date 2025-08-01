@@ -1,5 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
              x:Class="ProgrammersToolKit.Views.CodeEditorView">
   <StackPanel Margin="32" Spacing="12">
     <TextBlock Text="Code Editor" FontWeight="Bold" FontSize="18"/>
@@ -25,7 +26,6 @@
     <!-- AvaloniaEdit integration -->
     <Border Height="320" Background="{DynamicResource BackgroundColor}" CornerRadius="8" Margin="0,8,0,0">
       <avaloniaEdit:TextEditor x:Name="Editor"
-                              xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
                               ShowLineNumbers="True"
                               FontFamily="Consolas"
                               FontSize="15"
