@@ -1,0 +1,141 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="screenshareav.Views.APITestingView">
+  <ScrollViewer>
+    <StackPanel Margin="32" Spacing="16">
+      <!-- Header -->
+      <TextBlock Text="API Testing Suite" FontWeight="Bold" FontSize="20"/>
+      <TextBlock Text="A comprehensive API testing tool with Postman-like functionality" FontStyle="Italic" Margin="0,-8,0,8"/>
+      
+      <!-- Request Configuration -->
+      <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="16">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Request Configuration" FontWeight="SemiBold" FontSize="16"/>
+          
+          <!-- HTTP Method and URL -->
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <ComboBox x:Name="HttpMethodCombo" Width="100" SelectedIndex="0">
+              <ComboBoxItem Content="GET"/>
+              <ComboBoxItem Content="POST"/>
+              <ComboBoxItem Content="PUT"/>
+              <ComboBoxItem Content="DELETE"/>
+              <ComboBoxItem Content="PATCH"/>
+              <ComboBoxItem Content="HEAD"/>
+              <ComboBoxItem Content="OPTIONS"/>
+            </ComboBox>
+            <TextBox x:Name="UrlTextBox" Watermark="Enter API URL..." MinWidth="400"/>
+            <Button x:Name="SendRequestBtn" Content="Send" Background="#2563eb" Foreground="White" Padding="16,8"/>
+          </StackPanel>
+          
+          <!-- Headers Section -->
+          <Expander Header="Headers" IsExpanded="False">
+            <StackPanel Spacing="8">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBox x:Name="HeaderKeyInput" Watermark="Header Key" Width="200"/>
+                <TextBox x:Name="HeaderValueInput" Watermark="Header Value" Width="300"/>
+                <Button x:Name="AddHeaderBtn" Content="Add Header" Width="100"/>
+              </StackPanel>
+              <ListBox x:Name="HeadersList" Height="120" BorderThickness="1" BorderBrush="#E0E0E0"/>
+              <Button x:Name="ClearHeadersBtn" Content="Clear All Headers" Width="140" HorizontalAlignment="Left"/>
+            </StackPanel>
+          </Expander>
+          
+          <!-- Request Body Section -->
+          <Expander Header="Request Body (JSON)" IsExpanded="False">
+            <StackPanel Spacing="8">
+              <TextBox x:Name="RequestBodyTextBox" AcceptsReturn="True" Height="150" 
+                       Watermark="Enter JSON request body here..." TextWrapping="Wrap"/>
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Name="FormatJsonBtn" Content="Format JSON" Width="120"/>
+                <Button x:Name="ClearBodyBtn" Content="Clear Body" Width="100"/>
+              </StackPanel>
+            </StackPanel>
+          </Expander>
+        </StackPanel>
+      </Border>
+      
+      <!-- Test Case Management -->
+      <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="16">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Test Case Management" FontWeight="SemiBold" FontSize="16"/>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBox x:Name="TestCaseNameInput" Watermark="Test case name..." Width="200"/>
+            <Button x:Name="SaveTestBtn" Content="Save Test" Width="100"/>
+            <ComboBox x:Name="LoadTestCombo" Width="200"/>
+            <TextBlock Text="Load saved test..." FontStyle="Italic" VerticalAlignment="Center" Margin="4,0,0,0"/>
+            <Button x:Name="LoadTestBtn" Content="Load" Width="80"/>
+            <Button x:Name="DeleteTestBtn" Content="Delete" Width="80"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+      
+      <!-- HTTP File Operations -->
+      <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="16">
+        <StackPanel Spacing="12">
+          <TextBlock Text="HTTP File Operations" FontWeight="SemiBold" FontSize="16"/>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button x:Name="ImportHttpFileBtn" Content="Import .http File" Width="140"/>
+            <Button x:Name="ExportHttpFileBtn" Content="Export .http File" Width="140"/>
+          </StackPanel>
+          <TextBlock Text="Compatible with Visual Studio .http file format" FontStyle="Italic" FontSize="12"/>
+        </StackPanel>
+      </Border>
+      
+      <!-- Response Section -->
+      <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="16">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Response" FontWeight="SemiBold" FontSize="16"/>
+          
+          <!-- Response Status -->
+          <StackPanel Orientation="Horizontal" Spacing="16">
+            <TextBlock x:Name="StatusCodeText" Text="Status: -" FontWeight="SemiBold"/>
+            <TextBlock x:Name="ResponseTimeText" Text="Time: -" FontWeight="SemiBold"/>
+            <TextBlock x:Name="ResponseSizeText" Text="Size: -" FontWeight="SemiBold"/>
+          </StackPanel>
+          
+          <!-- Response Tabs -->
+          <TabControl>
+            <TabItem Header="Response Body">
+              <StackPanel Spacing="8">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <Button x:Name="FormatResponseBtn" Content="Format JSON" Width="120"/>
+                  <Button x:Name="CopyResponseBtn" Content="Copy Response" Width="120"/>
+                </StackPanel>
+                <TextBox x:Name="ResponseBodyTextBox" AcceptsReturn="True" Height="300" 
+                         IsReadOnly="True" TextWrapping="Wrap"/>
+              </StackPanel>
+            </TabItem>
+            <TabItem Header="Response Headers">
+              <TextBox x:Name="ResponseHeadersTextBox" AcceptsReturn="True" Height="300" 
+                       IsReadOnly="True" TextWrapping="Wrap"/>
+            </TabItem>
+          </TabControl>
+        </StackPanel>
+      </Border>
+      
+      <!-- Response Validation -->
+      <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="16">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Response Validation" FontWeight="SemiBold" FontSize="16"/>
+          
+          <!-- Expected Response -->
+          <StackPanel Spacing="8">
+            <TextBlock Text="Expected JSON Response:" FontWeight="Medium"/>
+            <TextBox x:Name="ExpectedResponseTextBox" AcceptsReturn="True" Height="120" 
+                     Watermark="Enter expected JSON response for validation..."/>
+          </StackPanel>
+          
+          <!-- Expected Status Code -->
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="Expected Status Code:" VerticalAlignment="Center"/>
+            <TextBox x:Name="ExpectedStatusCodeInput" Width="100" Watermark="200"/>
+            <Button x:Name="ValidateResponseBtn" Content="Validate Response" Width="140"/>
+          </StackPanel>
+          
+          <!-- Validation Results -->
+          <TextBlock x:Name="ValidationResultText" TextWrapping="Wrap" FontWeight="Medium"/>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

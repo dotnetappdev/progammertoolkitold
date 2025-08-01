@@ -62,6 +62,22 @@ namespace screenshareav.Database
                     PasswordEnc TEXT,
                     LastUsed DATETIME DEFAULT CURRENT_TIMESTAMP
                 );
+                CREATE TABLE IF NOT EXISTS ApiTests (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name TEXT UNIQUE,
+                    TestData TEXT,
+                    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+                );
+                CREATE TABLE IF NOT EXISTS GeneralData (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Category TEXT,
+                    Key TEXT,
+                    Value TEXT,
+                    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    UNIQUE(Category, Key)
+                );
             ";
             cmd.ExecuteNonQuery();
         }
@@ -170,6 +186,92 @@ namespace screenshareav.Database
             cmd.CommandText = "SELECT Code FROM AccessCodes ORDER BY Timestamp DESC LIMIT 1";
             using var reader = cmd.ExecuteReader();
             return reader.Read() ? reader.GetString(0) : null;
+        }
+
+        // API Test Management
+        public static void SaveApiTest(string name, string testData)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO ApiTests (Name, TestData) VALUES ($name, $data)
+                ON CONFLICT(Name) DO UPDATE SET TestData = $data, UpdatedAt = CURRENT_TIMESTAMP;";
+            cmd.Parameters.AddWithValue("$name", name);
+            cmd.Parameters.AddWithValue("$data", testData);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static string? GetApiTest(string name)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT TestData FROM ApiTests WHERE Name = $name";
+            cmd.Parameters.AddWithValue("$name", name);
+            using var reader = cmd.ExecuteReader();
+            return reader.Read() ? reader.GetString(0) : null;
+        }
+
+        public static List<string> GetApiTestNames()
+        {
+            var names = new List<string>();
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT Name FROM ApiTests ORDER BY UpdatedAt DESC";
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                names.Add(reader.GetString(0));
+            }
+            return names;
+        }
+
+        public static void DeleteApiTest(string name)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM ApiTests WHERE Name = $name";
+            cmd.Parameters.AddWithValue("$name", name);
+            cmd.ExecuteNonQuery();
+        }
+
+        // General CRUD Operations
+        public static void SaveData(string category, string key, string value)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO GeneralData (Category, Key, Value) VALUES ($category, $key, $value)
+                ON CONFLICT(Category, Key) DO UPDATE SET Value = $value, UpdatedAt = CURRENT_TIMESTAMP;";
+            cmd.Parameters.AddWithValue("$category", category);
+            cmd.Parameters.AddWithValue("$key", key);
+            cmd.Parameters.AddWithValue("$value", value);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static string? GetData(string category, string key)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT Value FROM GeneralData WHERE Category = $category AND Key = $key";
+            cmd.Parameters.AddWithValue("$category", category);
+            cmd.Parameters.AddWithValue("$key", key);
+            using var reader = cmd.ExecuteReader();
+            return reader.Read() ? reader.GetString(0) : null;
+        }
+
+        public static void DeleteData(string category, string key)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM GeneralData WHERE Category = $category AND Key = $key";
+            cmd.Parameters.AddWithValue("$category", category);
+            cmd.Parameters.AddWithValue("$key", key);
+            cmd.ExecuteNonQuery();
         }
     }
 }

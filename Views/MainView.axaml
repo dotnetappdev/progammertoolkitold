@@ -21,6 +21,11 @@
             <TextBlock Text="Encryption Tools" Margin="8,0,0,0"/>
           </StackPanel>
         </ListBoxItem>
+        <ListBoxItem>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="API Testing" Margin="8,0,0,0"/>
+          </StackPanel>
+        </ListBoxItem>
         <ListBoxItem Content="RDP"/>
         <ListBoxItem Content="Settings"/>
       </ListBox>

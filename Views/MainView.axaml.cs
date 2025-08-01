@@ -15,12 +15,16 @@ namespace screenshareav.Views
             AvaloniaXamlLoader.Load(this);
             _pages = new UserControl[]
             {
-                new GeneralView(),
-                new MonitorSharingView(),
-                new RemoteControlView(),
-                new FtpClientView(),
-                new RdpView(),
-                new SettingsView()
+                new GeneralView(),           // 0 - General
+                new MonitorSharingView(),    // 1 - Monitor Sharing
+                new RemoteControlView(),     // 2 - Remote Control
+                new FileSharingView(),       // 3 - File Sharing
+                new FtpClientView(),         // 4 - FTP Client
+                new CodeEditorView(),        // 5 - Code Editor
+                new EncryptionToolsView(),   // 6 - Encryption Tools
+                new APITestingView(),        // 7 - API Testing
+                new RdpView(),               // 8 - RDP
+                new SettingsView()           // 9 - Settings
             };
             var sidebar = this.FindControl<ListBox>("Sidebar");
             if (sidebar != null)
@@ -40,36 +44,7 @@ namespace screenshareav.Views
             var mainContent = this.FindControl<ContentControl>("MainContent");
             if (sidebar?.SelectedIndex >= 0 && sidebar.SelectedIndex < _pages.Length && mainContent != null)
             {
-                switch (sidebar.SelectedIndex)
-                {
-                    case 0:
-                        mainContent.Content = _pages[0];
-                        break;
-                    case 1:
-                        mainContent.Content = _pages[1];
-                        break;
-                    case 2:
-                        mainContent.Content = _pages[2];
-                        break;
-                    case 3:
-                        mainContent.Content = _pages[3];
-                        break;
-                    case 4:
-                        mainContent.Content = new FtpClientView();
-                        break;
-                    case 5:
-                        mainContent.Content = new CodeEditorView();
-                        break;
-                    case 6:
-                        mainContent.Content = new EncryptionToolsView();
-                        break;
-                    case 7:
-                        mainContent.Content = new RdpView();
-                        break;
-                    case 8:
-                        mainContent.Content = new SettingsView();
-                        break;
-                }
+                mainContent.Content = _pages[sidebar.SelectedIndex];
             }
         }
     }
