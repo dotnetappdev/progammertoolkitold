@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
 
-namespace screenshareav.Database
+namespace ProgrammersToolKit.Database
 {
     public static class DatabaseManager
     {
@@ -13,16 +13,16 @@ namespace screenshareav.Database
 
         private static string GetSecureDbPath()
         {
-            string dbName = "screenshareav.db";
+            string dbName = "ProgrammersToolKit.db";
 #if WINDOWS
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            return Path.Combine(appData, "ScreenShareAV", dbName);
+            return Path.Combine(appData, "ProgrammersToolKit", dbName);
 #elif OSX
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            return Path.Combine(appData, "Library", "Application Support", "ScreenShareAV", dbName);
+            return Path.Combine(appData, "Library", "Application Support", "ProgrammersToolKit", dbName);
 #else
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            return Path.Combine(appData, "ScreenShareAV", dbName);
+            return Path.Combine(appData, "ProgrammersToolKit", dbName);
 #endif
         }
 
@@ -62,8 +62,135 @@ namespace screenshareav.Database
                     PasswordEnc TEXT,
                     LastUsed DATETIME DEFAULT CURRENT_TIMESTAMP
                 );
+                CREATE TABLE IF NOT EXISTS ApiCalls (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Method TEXT,
+                    Url TEXT,
+                    Headers TEXT,
+                    JsonBody TEXT,
+                    ExpectedStatus INTEGER,
+                    ExpectedJson TEXT,
+                    ExpectedXml TEXT
+                );
+                CREATE TABLE IF NOT EXISTS CtfFavorites (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Type TEXT NOT NULL, -- 'jwt', 'hash', 'headers'
+                    Name TEXT,
+                    Value TEXT,
+                    Created DATETIME DEFAULT CURRENT_TIMESTAMP
+                );
             ";
             cmd.ExecuteNonQuery();
+        }
+
+        // CTF Favorites CRUD
+        public static void SaveCtfFavorite(string type, string name, string value)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO CtfFavorites (Type, Name, Value) VALUES ($type, $name, $value)";
+            cmd.Parameters.AddWithValue("$type", type);
+            cmd.Parameters.AddWithValue("$name", name);
+            cmd.Parameters.AddWithValue("$value", value);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static List<(int Id, string Type, string Name, string Value)> GetCtfFavorites(string type)
+        {
+            var list = new List<(int, string, string, string)>();
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT Id, Type, Name, Value FROM CtfFavorites WHERE Type = $type ORDER BY Created DESC";
+            cmd.Parameters.AddWithValue("$type", type);
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add((reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)));
+            }
+            return list;
+        }
+
+        public static void DeleteCtfFavorite(int id)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM CtfFavorites WHERE Id = $id";
+            cmd.Parameters.AddWithValue("$id", id);
+            cmd.ExecuteNonQuery();
+        }
+
+        // API Tester CRUD
+        public static void SaveApiCall(object callObj)
+        {
+            // Accepts ApiTesterView.ApiCall
+            dynamic call = callObj;
+            string headersJson = System.Text.Json.JsonSerializer.Serialize(call.Headers);
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            if (call.Id > 0)
+            {
+                cmd.CommandText = @"UPDATE ApiCalls SET Method=$m, Url=$u, Headers=$h, JsonBody=$b, ExpectedStatus=$es, ExpectedJson=$ej, ExpectedXml=$ex WHERE Id=$id";
+                cmd.Parameters.AddWithValue("$id", call.Id);
+            }
+            else
+            {
+                cmd.CommandText = @"INSERT INTO ApiCalls (Method, Url, Headers, JsonBody, ExpectedStatus, ExpectedJson, ExpectedXml) VALUES ($m, $u, $h, $b, $es, $ej, $ex)";
+            }
+            cmd.Parameters.AddWithValue("$m", call.Method);
+            cmd.Parameters.AddWithValue("$u", call.Url);
+            cmd.Parameters.AddWithValue("$h", headersJson);
+            cmd.Parameters.AddWithValue("$b", call.JsonBody);
+            cmd.Parameters.AddWithValue("$es", (object?)call.ExpectedStatus ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("$ej", (object?)call.ExpectedJson ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("$ex", (object?)call.ExpectedXml ?? DBNull.Value);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void DeleteApiCall(int id)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM ApiCalls WHERE Id = $id";
+            cmd.Parameters.AddWithValue("$id", id);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static System.Collections.Generic.List<object> GetApiCalls()
+        {
+            var list = new System.Collections.Generic.List<object>();
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT Id, Method, Url, Headers, JsonBody, ExpectedStatus, ExpectedJson, ExpectedXml FROM ApiCalls ORDER BY Id DESC";
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                var id = reader.GetInt32(0);
+                var method = reader.GetString(1);
+                var url = reader.GetString(2);
+                var headersJson = reader.GetString(3);
+                var jsonBody = reader.GetString(4);
+                var expectedStatus = !reader.IsDBNull(5) ? reader.GetInt32(5) : (int?)null;
+                var expectedJson = !reader.IsDBNull(6) ? reader.GetString(6) : null;
+                var expectedXml = !reader.IsDBNull(7) ? reader.GetString(7) : null;
+                var headers = System.Text.Json.JsonSerializer.Deserialize<System.Collections.Generic.List<dynamic>>(headersJson) ?? new System.Collections.Generic.List<dynamic>();
+                list.Add(new {
+                    Id = id,
+                    Method = method,
+                    Url = url,
+                    Headers = headers,
+                    JsonBody = jsonBody,
+                    ExpectedStatus = expectedStatus,
+                    ExpectedJson = expectedJson,
+                    ExpectedXml = expectedXml
+                });
+            }
+            return list;
         }
 
         // Simple XOR encryption for demonstration (replace with DPAPI or platform crypto for production)

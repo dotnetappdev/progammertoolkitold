@@ -1,9 +1,9 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="screenshareav.Views.RdpView">
+             x:Class="ProgrammersToolKit.Views.RdpView">
   <StackPanel Margin="32" Spacing="12">
-    <TextBlock Text="Remote Desktop (RDP)" FontWeight="Bold" FontSize="18"/>
-    <TextBlock Text="Connect to a remote machine using IP, username, and password."/>
+    <TextBlock Text="Remote Desktop (RDP)" FontWeight="Bold" FontSize="{DynamicResource FontSizeLarge}" Foreground="{DynamicResource TextColor}"/>
+    <TextBlock Text="Connect to a remote machine using IP, username, and password." Foreground="{DynamicResource TextColor}"/>
     <StackPanel Orientation="Horizontal" Spacing="8">
       <TextBlock Text="IP Address:" Width="90"/>
       <TextBox x:Name="IpAddressBox" Width="200"/>
@@ -20,7 +20,7 @@
       <Button x:Name="ConnectBtn" Content="Connect" Width="100"/>
       <Button x:Name="SaveBtn" Content="Save Connection" Width="140"/>
     </StackPanel>
-    <TextBlock Text="Saved Connections:" FontWeight="SemiBold" Margin="0,16,0,0"/>
+    <TextBlock Text="Saved Connections:" FontWeight="SemiBold" Margin="0,16,0,0" Foreground="{DynamicResource TextColor}"/>
     <ListBox x:Name="ConnectionsList" Height="120"/>
   </StackPanel>
 </UserControl>

@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+             x:Class="ProgrammersToolKit.Views.NotepadView">
+  <StackPanel Margin="32" Spacing="12">
+    <TextBlock Text="Featured Notepad" FontWeight="Bold" FontSize="20"/>
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <Button x:Name="NewNoteBtn" Content="New Note" Width="100"/>
+      <Button x:Name="SaveNoteBtn" Content="Save Note" Width="100"/>
+      <Button x:Name="DeleteNoteBtn" Content="Delete Note" Width="100"/>
+      <Button x:Name="RunMacroBtn" Content="Run Macro" Width="100"/>
+    </StackPanel>
+    <ComboBox x:Name="NotesCombo" Width="300" Margin="0,8,0,0"/>
+    <avaloniaEdit:TextEditor x:Name="NoteEditor" ShowLineNumbers="True" FontFamily="Consolas" Height="220"/>
+    <TextBox x:Name="MacroBox" Watermark="Macro (C# code, e.g. replace, format, etc)" AcceptsReturn="True" Height="60" FontFamily="Consolas"/>
+    <TextBlock x:Name="StatusBlock" FontWeight="SemiBold" Margin="0,12,0,0"/>
+  </StackPanel>
+</UserControl>

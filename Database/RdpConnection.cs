@@ -1,4 +1,4 @@
-namespace screenshareav.Database
+namespace ProgrammersToolKit.Database
 {
     public class RdpConnection
     {

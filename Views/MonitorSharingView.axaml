@@ -1,9 +1,9 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="screenshareav.Views.MonitorSharingView">
+             x:Class="ProgrammersToolKit.Views.MonitorSharingView">
   <StackPanel Margin="32" Spacing="12">
-    <TextBlock Text="Monitor Sharing" FontWeight="Bold" FontSize="18"/>
-    <TextBlock Text="Select which monitors to share or view." Margin="0,8,0,0"/>
+    <TextBlock Text="Monitor Sharing" FontWeight="Bold" FontSize="{DynamicResource FontSizeLarge}" Foreground="{DynamicResource TextColor}"/>
+    <TextBlock Text="Select which monitors to share or view." Margin="0,8,0,0" Foreground="{DynamicResource TextColor}"/>
     <ItemsControl x:Name="MonitorList">
       <!-- Each item: Checkbox + Monitor name -->
     </ItemsControl>
@@ -12,6 +12,6 @@
       <Button Content="Side by Side" x:Name="SideBySideBtn" Width="120"/>
       <Button Content="Merge View" x:Name="MergeBtn" Width="120"/>
     </StackPanel>
-    <TextBlock Text="Drag monitor windows to any screen. Arrange tabs or merge as needed." FontStyle="Italic" FontSize="12" Margin="0,8,0,0"/>
+    <TextBlock Text="Drag monitor windows to any screen. Arrange tabs or merge as needed." FontStyle="Italic" FontSize="{DynamicResource FontSizeSmall}" Margin="0,8,0,0" Foreground="{DynamicResource TextColor}"/>
   </StackPanel>
 </UserControl>

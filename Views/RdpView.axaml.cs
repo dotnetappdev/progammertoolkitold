@@ -1,12 +1,12 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using screenshareav.Database;
+using ProgrammersToolKit.Database;
 using System.Collections.Generic;
 using Avalonia.Media;
 using Avalonia;
 using System.Linq;
 
-namespace screenshareav.Views
+namespace ProgrammersToolKit.Views
 {
     public partial class RdpView : UserControl
     {
@@ -17,7 +17,7 @@ namespace screenshareav.Views
         private Button? _connectBtn;
         private Button? _deleteBtn;
         private TextBlock? _statusText;
-        private const string EncKey = "ScreenShareAV2025"; // For demo only
+        private const string EncKey = "ProgrammersToolKit2025"; // For demo only
 
         public RdpView()
         {

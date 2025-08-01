@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace screenshareav.Services
+namespace ProgrammersToolKit.Services
 {
     public class MonitorInfo
     {

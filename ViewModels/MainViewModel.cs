@@ -1,6 +1,6 @@
 using ReactiveUI;
 
-namespace screenshareav.ViewModels
+namespace ProgrammersToolKit.ViewModels
 {
     public class MainViewModel : ReactiveObject
     {

@@ -7,7 +7,7 @@ using Avalonia.Layout;
 using Avalonia;
 using screenshareav.Services;
 
-namespace screenshareav.Views
+namespace ProgrammersToolKit.Views
 {
     public partial class MonitorSharingView : UserControl
     {

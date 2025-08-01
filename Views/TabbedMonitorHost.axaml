@@ -1,6 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="screenshareav.Views.TabbedMonitorHost"
+        x:Class="ProgrammersToolKit.Views.TabbedMonitorHost"
         Width="1200" Height="800"
         Title="Monitor Tabs">
   <TabControl x:Name="MonitorTabs">

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Avalonia.Media;
 using Avalonia;
 
-namespace screenshareav.Views
+namespace ProgrammersToolKit.Views
 {
     public partial class FtpClientView : UserControl
     {

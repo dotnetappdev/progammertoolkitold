@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+             x:Class="ProgrammersToolKit.Views.DiffEditorView">
+  <StackPanel Margin="32" Spacing="12">
+    <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,0,0,0">
+      <TextBox x:Name="FindBox" Width="120" Watermark="Find..."/>
+      <TextBox x:Name="ReplaceBox" Width="120" Watermark="Replace..."/>
+      <Button x:Name="FindBtn" Content="Find" Width="60"/>
+      <Button x:Name="ReplaceBtn" Content="Replace" Width="80"/>
+    </StackPanel>
+    <TextBlock Text="Diff Editor" FontWeight="Bold" FontSize="20"/>
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <Button x:Name="LoadFile1Btn" Content="Load File 1" Width="120"/>
+      <Button x:Name="LoadFile2Btn" Content="Load File 2" Width="120"/>
+      <Button x:Name="CompareBtn" Content="Compare" Width="120"/>
+    </StackPanel>
+    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*">
+      <TextBlock Text="File 1" Grid.Column="0"/>
+      <TextBlock Text="File 2" Grid.Column="1"/>
+      <avaloniaEdit:TextEditor x:Name="Editor1" Grid.Row="1" Grid.Column="0" ShowLineNumbers="True" FontFamily="Consolas" Height="300"/>
+      <avaloniaEdit:TextEditor x:Name="Editor2" Grid.Row="1" Grid.Column="1" ShowLineNumbers="True" FontFamily="Consolas" Height="300"/>
+    </Grid>
+    <TextBlock x:Name="DiffSummary" FontWeight="SemiBold" Margin="0,12,0,0"/>
+    <StackPanel Orientation="Horizontal" Spacing="24" Margin="0,8,0,0" HorizontalAlignment="Stretch">
+      <TextBlock x:Name="File1Stats"/>
+      <TextBlock x:Name="File2Stats"/>
+      <TextBlock x:Name="File1Encoding"/>
+      <TextBlock x:Name="File2Encoding"/>
+      <Button x:Name="SaveFile1Btn" Content="Save File 1" Width="100"/>
+      <Button x:Name="SaveFile2Btn" Content="Save File 2" Width="100"/>
+    </StackPanel>
+  </StackPanel>
+</UserControl>

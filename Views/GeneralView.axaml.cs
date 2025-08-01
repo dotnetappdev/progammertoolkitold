@@ -6,7 +6,7 @@ using Avalonia.Media;
 using System;
 using Avalonia;
 
-namespace screenshareav.Views
+namespace ProgrammersToolKit.Views
 {
     public partial class GeneralView : UserControl
     {

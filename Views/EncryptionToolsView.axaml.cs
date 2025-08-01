@@ -5,7 +5,7 @@ using System.Text;
 using System;
 using System.Text.Json;
 
-namespace screenshareav.Views
+namespace ProgrammersToolKit.Views
 {
     public partial class EncryptionToolsView : UserControl
     {

@@ -1,29 +1,42 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="screenshareav.Views.MainView">
+             x:Class="ProgrammersToolKit.Views.MainView">
   <DockPanel>
     <!-- Sidebar -->
     <StackPanel DockPanel.Dock="Left" Width="220" Background="#F3F3F3">
       <TextBlock Text="ScreenShare  Control" FontWeight="Bold" FontSize="20" Margin="16"/>
-      <ListBox x:Name="Sidebar" SelectedIndex="0">
-        <ListBoxItem Content="General"/>
-        <ListBoxItem Content="Monitor Sharing"/>
-        <ListBoxItem Content="Remote Control"/>
-        <ListBoxItem Content="File Sharing"/>
-        <ListBoxItem Content="FTP Client"/>
-        <ListBoxItem>
-          <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Code Editor" Margin="8,0,0,0"/>
-          </StackPanel>
-        </ListBoxItem>
-        <ListBoxItem>
-          <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Encryption Tools" Margin="8,0,0,0"/>
-          </StackPanel>
-        </ListBoxItem>
-        <ListBoxItem Content="RDP"/>
-        <ListBoxItem Content="Settings"/>
-      </ListBox>
+        <ListBox x:Name="Sidebar" SelectedIndex="0">
+          <ListBoxItem Content="General"/>
+          <ListBoxItem Content="Monitor Sharing"/>
+          <ListBoxItem Content="Remote Control"/>
+          <ListBoxItem Content="File Sharing"/>
+          <ListBoxItem Content="FTP Client"/>
+          <ListBoxItem>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="Code Editor" Margin="8,0,0,0"/>
+            </StackPanel>
+          </ListBoxItem>
+          <ListBoxItem>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="Encryption Tools" Margin="8,0,0,0"/>
+            </StackPanel>
+          </ListBoxItem>
+          <ListBoxItem Content="RDP"/>
+          <ListBoxItem Content="API Tester"/>
+          <ListBoxItem Content="JSON Query/Visualizer"/>
+          <ListBoxItem Content="Diff Editor"/>
+          <ListBoxItem Content="Notepad"/>
+          <ListBoxItem Content="CTF Tools"/>
+          <ListBoxItem Content="Text Stripper"/>
+          <ListBoxItem Content="Settings"/>
+        </ListBox>
+      <StackPanel Margin="0,24,0,0" Spacing="6">
+        <TextBlock Text="Capture The Flag Tools" FontWeight="Bold" FontSize="15" Margin="8,0,0,0"/>
+        <Button Name="SidebarInspectHeadersBtn" Content="Inspect Last HTTP Response Headers" Height="32" Margin="8,0,8,0"/>
+        <Button Name="SidebarJwtDecodeBtn" Content="Decode JWT Token" Height="32" Margin="8,0,8,0"/>
+        <Button Name="SidebarHashCrackBtn" Content="Hash/Crack Tool (Stub)" Height="32" Margin="8,0,8,0"/>
+        <Button Name="SidebarCookieDecodeBtn" Content="Cookie/Claims Decoder" Height="32" Margin="8,0,8,0"/>
+      </StackPanel>
       <ToggleSwitch Content="Dark Mode" Margin="16,32,16,0"/>
     </StackPanel>
     <!-- Main Content -->

@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using screenshareav.Database;
 
-namespace screenshareav
+namespace ProgrammersToolKit
 {
     public partial class MainWindow : Window
     {

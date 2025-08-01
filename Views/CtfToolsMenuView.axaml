@@ -1,0 +1,10 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ProgrammersToolKit.Views.CtfToolsMenuView">
+  <StackPanel Margin="16" Spacing="10">
+    <TextBlock Text="Capture The Flag Tools" FontWeight="Bold" FontSize="18" Margin="0,0,0,8"/>
+    <Button Name="MenuInspectHeadersBtn" Content="Inspect Last HTTP Response Headers" Height="36"/>
+    <Button Name="MenuJwtDecodeBtn" Content="Decode JWT Token" Height="36"/>
+    <Button Name="MenuHashCrackBtn" Content="Hash/Crack Tool (Stub)" Height="36"/>
+  </StackPanel>
+</UserControl>

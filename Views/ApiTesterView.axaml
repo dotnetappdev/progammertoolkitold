@@ -1,0 +1,67 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ProgrammersToolKit.Views.ApiTesterView">
+  <StackPanel Margin="32" Spacing="12">
+    <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,0,0,0">
+      <TextBlock Text="Test Name:" VerticalAlignment="Center"/>
+      <TextBox x:Name="TestNameBox" Width="200" Watermark="Optional name for this test"/>
+      <Button x:Name="ExportTestsBtn" Content="Export Tests" Width="120"/>
+      <Button x:Name="ImportTestsBtn" Content="Import Tests" Width="120"/>
+    </StackPanel>
+    <TextBlock Text="API Tester" FontWeight="Bold" FontSize="{DynamicResource FontSizeLarge}" Foreground="{DynamicResource TextColor}"/>
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <ComboBox x:Name="MethodCombo" Width="80">
+        <ComboBoxItem Content="GET"/>
+        <ComboBoxItem Content="POST"/>
+        <ComboBoxItem Content="PUT"/>
+        <ComboBoxItem Content="DELETE"/>
+        <ComboBoxItem Content="PATCH"/>
+      </ComboBox>
+      <TextBox x:Name="UrlBox" Watermark="https://api.example.com/endpoint" Width="340"/>
+      <Button x:Name="SendBtn" Content="Send" Width="80"/>
+      <Button x:Name="SaveCallBtn" Content="Save Call" Width="100"/>
+      <Button x:Name="DeleteCallBtn" Content="Delete" Width="80"/>
+    </StackPanel>
+    <Expander Header="Headers" IsExpanded="False">
+      <DataGrid x:Name="HeadersGrid" AutoGenerateColumns="False" Height="100">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Key" Binding="{Binding Key}" Width="*"/>
+          <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="2*"/>
+        </DataGrid.Columns>
+      </DataGrid>
+      <Button x:Name="AddHeaderBtn" Content="Add Header" Width="100" Margin="0,4,0,0"/>
+    </Expander>
+    <Expander Header="JSON Body (for POST/PUT/PATCH)" IsExpanded="False">
+      <TextBox x:Name="JsonBodyBox" AcceptsReturn="True" Height="120" FontFamily="Consolas"/>
+    </Expander>
+    <Expander Header="Expected Response" IsExpanded="False">
+      <StackPanel Spacing="6">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Status Code:" VerticalAlignment="Center"/>
+          <TextBox x:Name="ExpectedStatusBox" Width="60"/>
+        </StackPanel>
+        <TextBlock Text="Expected JSON (optional):"/>
+        <TextBox x:Name="ExpectedJsonBox" AcceptsReturn="True" Height="60" FontFamily="Consolas"/>
+        <TextBlock Text="Expected XML (optional):"/>
+        <TextBox x:Name="ExpectedXmlBox" AcceptsReturn="True" Height="60" FontFamily="Consolas"/>
+      </StackPanel>
+    </Expander>
+    <Expander Header="Value Assertions (JSONPath)" IsExpanded="False">
+      <DataGrid x:Name="ValueAssertionsGrid" AutoGenerateColumns="False" Height="100">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="JSONPath" Binding="{Binding JsonPath}" Width="2*"/>
+          <DataGridTextColumn Header="Expected Value" Binding="{Binding ExpectedValue}" Width="2*"/>
+        </DataGrid.Columns>
+      </DataGrid>
+      <Button x:Name="AddAssertionBtn" Content="Add Assertion" Width="120" Margin="0,4,0,0"/>
+    </Expander>
+    <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,12,0,0">
+      <TextBlock Text="Response" FontWeight="SemiBold" Foreground="{DynamicResource TextColor}"/>
+      <Button x:Name="RunAllTestsBtn" Content="Run All Tests" Width="120" Background="#0078D4" Foreground="White" FontWeight="Bold"/>
+    </StackPanel>
+    <TextBox x:Name="ResponseBox" AcceptsReturn="True" Height="160" IsReadOnly="True" FontFamily="Consolas" Background="#181818" Foreground="Lime"/>
+    <TextBlock x:Name="TestResultBlock" FontWeight="Bold" Margin="0,8,0,0"/>
+    <TextBlock Text="Saved Calls" FontWeight="SemiBold" Margin="0,12,0,0" Foreground="{DynamicResource TextColor}"/>
+    <ListBox x:Name="SavedCallsList" Height="100"/>
+  </StackPanel>
+</UserControl>

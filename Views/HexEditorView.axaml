@@ -1,8 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="screenshareav.Views.HexEditorView">
+             x:Class="ProgrammersToolKit.Views.HexEditorView">
   <StackPanel Margin="32" Spacing="12">
-    <TextBlock Text="Hex Editor" FontWeight="Bold" FontSize="18"/>
+    <TextBlock Text="Hex Editor" FontWeight="Bold" FontSize="{DynamicResource FontSizeLarge}" Foreground="{DynamicResource TextColor}"/>
     <StackPanel Orientation="Horizontal" Spacing="8">
       <TextBox x:Name="FilePathTextBox" Watermark="File Path" Width="300"/>
       <Button x:Name="OpenBtn" Content="Open" Width="80"/>

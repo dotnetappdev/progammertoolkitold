@@ -1,3 +1,4 @@
+
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
@@ -6,8 +7,9 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
+using AvaloniaEdit;
 
-namespace screenshareav.Views
+namespace ProgrammersToolKit.Views
 {
     public partial class CodeEditorView : UserControl
     {
@@ -19,7 +21,7 @@ namespace screenshareav.Views
         private Button? _runBtn;
         private TextBlock? _editorStatus;
         private TextBox? _outputBox;
-        // TODO: Integrate Monaco/AvaloniaEdit editor control
+        private TextEditor? _editor;
 
         public CodeEditorView()
         {
@@ -32,6 +34,7 @@ namespace screenshareav.Views
             _runBtn = this.FindControl<Button>("RunBtn");
             _editorStatus = this.FindControl<TextBlock>("EditorStatus");
             _outputBox = this.FindControl<TextBox>("OutputBox");
+            _editor = this.FindControl<TextEditor>("Editor");
 
             if (_openFileBtn != null)
                 _openFileBtn.Click += OpenFileBtn_Click;
@@ -54,7 +57,8 @@ namespace screenshareav.Views
                 using var stream = await files[0].OpenReadAsync();
                 using var reader = new StreamReader(stream, encoding, detectEncodingFromByteOrderMarks: true);
                 var text = await reader.ReadToEndAsync();
-                // TODO: Set text in Monaco/AvaloniaEdit editor
+                if (_editor != null)
+                    _editor.Text = text;
                 SetStatus($"Opened {files[0].Name} ({encoding.EncodingName})", Brushes.Green);
             }
         }
@@ -69,8 +73,7 @@ namespace screenshareav.Views
             if (file != null)
             {
                 var encoding = GetSelectedEncoding();
-                // TODO: Get text from Monaco/AvaloniaEdit editor
-                var text = ""; // Placeholder
+                var text = _editor?.Text ?? string.Empty;
                 using var stream = await file.OpenWriteAsync();
                 using var writer = new StreamWriter(stream, encoding);
                 await writer.WriteAsync(text);
@@ -80,8 +83,7 @@ namespace screenshareav.Views
 
         private async void RunBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            // TODO: Get code from Monaco/AvaloniaEdit editor
-            var code = ""; // Placeholder
+            var code = _editor?.Text ?? string.Empty;
             var lang = _languageCombo?.SelectedIndex ?? 0;
             _outputBox!.Text = "Running...";
             switch (lang)

@@ -1,7 +1,7 @@
 ﻿using System;
 using Avalonia;
 
-namespace screenshareav
+namespace ProgrammersToolKit
 {
     internal class Program
     {

@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace screenshareav.Views
+namespace ProgrammersToolKit.Views
 {
     public partial class MonitorWindow : Window
     {

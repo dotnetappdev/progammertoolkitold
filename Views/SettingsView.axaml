@@ -1,8 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="screenshareav.Views.SettingsView">
+             x:Class="ProgrammersToolKit.Views.SettingsView">
   <StackPanel Margin="32">
-    <TextBlock Text="Settings" FontWeight="Bold" FontSize="18"/>
+    <TextBlock Text="Settings" FontWeight="Bold" FontSize="{DynamicResource FontSizeLarge}" Foreground="{DynamicResource TextColor}"/>
     <Button Content="Reset to Defaults" Width="180" Margin="0,12,0,0"/>
   </StackPanel>
 </UserControl>

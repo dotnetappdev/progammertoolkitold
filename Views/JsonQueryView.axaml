@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ProgrammersToolKit.Views.JsonQueryView">
+  <DockPanel Margin="24">
+    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,0,0,12">
+      <TextBlock Text="JSON Query Tool" FontWeight="Bold" FontSize="20"/>
+      <Button x:Name="RunQueryBtn" Content="Run Query" Width="100" Background="#0078D4" Foreground="White" FontWeight="Bold"/>
+    </StackPanel>
+    <Grid ColumnDefinitions="*,2*" RowDefinitions="Auto,*">
+      <StackPanel Grid.Column="0" Grid.Row="0" Spacing="8">
+        <TextBlock Text="JSON Input" FontWeight="SemiBold"/>
+        <TextBox x:Name="JsonInputBox" AcceptsReturn="True" Height="120" FontFamily="Consolas"/>
+        <TextBlock Text="SQL Query (e.g. SELECT data.name FROM $)" FontWeight="SemiBold"/>
+        <TextBox x:Name="SqlQueryBox" AcceptsReturn="True" Height="60" FontFamily="Consolas"/>
+      </StackPanel>
+      <StackPanel Grid.Column="1" Grid.Row="0" Spacing="8">
+        <TextBlock Text="Query Result" FontWeight="SemiBold"/>
+        <TextBox x:Name="QueryResultBox" AcceptsReturn="True" Height="180" FontFamily="Consolas" IsReadOnly="True" Background="#181818" Foreground="Lime"/>
+      </StackPanel>
+      <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Spacing="8" Margin="0,16,0,0">
+        <TextBlock Text="JSON Visualizer" FontWeight="SemiBold"/>
+        <Border BorderBrush="#444" BorderThickness="1" CornerRadius="4" Background="#222" Padding="8">
+          <TreeView x:Name="JsonTreeView" Height="220">
+            <TreeView.ItemTemplate>
+              <HierarchicalDataTemplate DataType="local:JsonTreeNode" ItemsSource="{Binding Children}">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                  <TextBlock Text="{Binding Display}" Foreground="White"/>
+                </StackPanel>
+              </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+          </TreeView>
+        </Border>
+      </StackPanel>
+    </Grid>
+  </DockPanel>
+</UserControl>

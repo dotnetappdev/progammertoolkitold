@@ -1,9 +1,9 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="screenshareav.Views.EncryptionToolsView">
+             x:Class="ProgrammersToolKit.Views.EncryptionToolsView">
   <StackPanel Margin="32" Spacing="12">
-    <TextBlock Text="Encryption Tools" FontWeight="Bold" FontSize="18"/>
-    <TextBlock Text="Encryption" FontStyle="Italic"/>
+    <TextBlock Text="Encryption Tools" FontWeight="Bold" FontSize="{DynamicResource FontSizeLarge}" Foreground="{DynamicResource TextColor}"/>
+    <TextBlock Text="Encryption" FontStyle="Italic" Foreground="{DynamicResource TextColor}"/>
     <Expander Header="JWT Token Decoder">
       <StackPanel>
         <TextBox x:Name="JwtInput" Watermark="Paste JWT token here..." AcceptsReturn="True" Height="60"/>
@@ -31,7 +31,7 @@
         <TextBlock x:Name="EncryptResult"/>
       </StackPanel>
     </Expander>
-    <TextBlock Text="Descriptions and best practices for JWT, hashing, and encryption are shown in tooltips and below." Margin="0,16,0,0"/>
-    <TextBlock Text="- JWT: JSON Web Tokens are used for stateless authentication. Header.Payload.Signature.\n- Hashing: One-way, for integrity.\n- Encryption: Two-way, for confidentiality."/>
+    <TextBlock Text="Descriptions and best practices for JWT, hashing, and encryption are shown in tooltips and below." Margin="0,16,0,0" Foreground="{DynamicResource TextColor}"/>
+    <TextBlock Text="- JWT: JSON Web Tokens are used for stateless authentication. Header.Payload.Signature.&#x0a;- Hashing: One-way, for integrity.&#x0a;- Encryption: Two-way, for confidentiality." Foreground="{DynamicResource TextColor}"/>
   </StackPanel>
 </UserControl>

@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ProgrammersToolKit.Views.TextStripperView">
+  <StackPanel Margin="32" Spacing="12">
+    <TextBlock Text="Text Stripper" FontWeight="Bold" FontSize="20"/>
+    <TextBlock Text="Paste or type text below. All non-printable, illegal, or unwanted characters will be stripped."/>
+    <TextBox x:Name="InputBox" AcceptsReturn="True" Height="120" Watermark="Paste your text here..."/>
+    <Button x:Name="StripBtn" Content="Strip Text" Width="120"/>
+    <TextBlock Text="Output:" FontWeight="SemiBold"/>
+    <TextBox x:Name="OutputBox" AcceptsReturn="True" Height="120" IsReadOnly="True"/>
+  </StackPanel>
+</UserControl>
