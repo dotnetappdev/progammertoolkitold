@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="ProgrammersToolKit.Views.ApiTesterView">
+             x:Class="ProgrammersToolKit.Views.ApiTesterView"
+             x:CompileBindings="False">
   <StackPanel Margin="32" Spacing="12">
     <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,0,0,0">
       <TextBlock Text="Test Name:" VerticalAlignment="Center"/>
@@ -23,13 +24,15 @@
       <Button x:Name="DeleteCallBtn" Content="Delete" Width="80"/>
     </StackPanel>
     <Expander Header="Headers" IsExpanded="False">
-      <DataGrid x:Name="HeadersGrid" AutoGenerateColumns="False" Height="100">
-        <DataGrid.Columns>
-          <DataGridTextColumn Header="Key" Binding="{Binding Key}" Width="*"/>
-          <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="2*"/>
-        </DataGrid.Columns>
-      </DataGrid>
-      <Button x:Name="AddHeaderBtn" Content="Add Header" Width="100" Margin="0,4,0,0"/>
+      <StackPanel>
+        <DataGrid x:Name="HeadersGrid" AutoGenerateColumns="False" Height="100">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Key" Binding="{Binding Key}" Width="*"/>
+            <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="2*"/>
+          </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="AddHeaderBtn" Content="Add Header" Width="100" Margin="0,4,0,0"/>
+      </StackPanel>
     </Expander>
     <Expander Header="JSON Body (for POST/PUT/PATCH)" IsExpanded="False">
       <TextBox x:Name="JsonBodyBox" AcceptsReturn="True" Height="120" FontFamily="Consolas"/>
@@ -47,13 +50,15 @@
       </StackPanel>
     </Expander>
     <Expander Header="Value Assertions (JSONPath)" IsExpanded="False">
-      <DataGrid x:Name="ValueAssertionsGrid" AutoGenerateColumns="False" Height="100">
-        <DataGrid.Columns>
-          <DataGridTextColumn Header="JSONPath" Binding="{Binding JsonPath}" Width="2*"/>
-          <DataGridTextColumn Header="Expected Value" Binding="{Binding ExpectedValue}" Width="2*"/>
-        </DataGrid.Columns>
-      </DataGrid>
-      <Button x:Name="AddAssertionBtn" Content="Add Assertion" Width="120" Margin="0,4,0,0"/>
+      <StackPanel>
+        <DataGrid x:Name="ValueAssertionsGrid" AutoGenerateColumns="False" Height="100">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="JSONPath" Binding="{Binding JsonPath}" Width="2*"/>
+            <DataGridTextColumn Header="Expected Value" Binding="{Binding ExpectedValue}" Width="2*"/>
+          </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="AddAssertionBtn" Content="Add Assertion" Width="120" Margin="0,4,0,0"/>
+      </StackPanel>
     </Expander>
     <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,12,0,0">
       <TextBlock Text="Response" FontWeight="SemiBold" Foreground="{DynamicResource TextColor}"/>

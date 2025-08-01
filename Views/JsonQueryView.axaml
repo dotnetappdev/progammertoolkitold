@@ -21,13 +21,7 @@
         <TextBlock Text="JSON Visualizer" FontWeight="SemiBold"/>
         <Border BorderBrush="#444" BorderThickness="1" CornerRadius="4" Background="#222" Padding="8">
           <TreeView x:Name="JsonTreeView" Height="220">
-            <TreeView.ItemTemplate>
-              <HierarchicalDataTemplate DataType="local:JsonTreeNode" ItemsSource="{Binding Children}">
-                <StackPanel Orientation="Horizontal" Spacing="4">
-                  <TextBlock Text="{Binding Display}" Foreground="White"/>
-                </StackPanel>
-              </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
+            <!-- Simplified TreeView - item template will be configured in code-behind -->
           </TreeView>
         </Border>
       </StackPanel>

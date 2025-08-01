@@ -1,0 +1,156 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ProgrammersToolKit.Views.PayloadGeneratorView"
+             x:CompileBindings="False">
+  <ScrollViewer>
+    <StackPanel Margin="24" Spacing="16">
+      <TextBlock Text="Payload Generator &amp; Exploit Development" FontWeight="Bold" FontSize="20"/>
+      
+      <!-- Payload Categories -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Payload Categories" FontWeight="SemiBold" FontSize="16"/>
+        <WrapPanel Orientation="Horizontal" ItemWidth="160" ItemHeight="40">
+          <Button x:Name="SqlPayloadsBtn" Content="SQL Injection" Background="#FF4444" Foreground="White" Margin="4"/>
+          <Button x:Name="XssPayloadsBtn" Content="XSS Payloads" Background="#FF6666" Foreground="White" Margin="4"/>
+          <Button x:Name="CmdInjectionBtn" Content="Command Injection" Background="#FF8888" Foreground="White" Margin="4"/>
+          <Button x:Name="LdapInjectionBtn" Content="LDAP Injection" Background="#FFAA44" Foreground="White" Margin="4"/>
+          <Button x:Name="XmlInjectionBtn" Content="XML Injection" Background="#FFCC66" Foreground="Black" Margin="4"/>
+          <Button x:Name="NoSqlInjectionBtn" Content="NoSQL Injection" Background="#FFDD88" Foreground="Black" Margin="4"/>
+        </WrapPanel>
+      </StackPanel>
+
+      <!-- Reverse Shell Generator -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Reverse Shell Generator" FontWeight="SemiBold" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Target OS:" VerticalAlignment="Center"/>
+          <ComboBox x:Name="TargetOsCombo" Width="120" SelectedIndex="0">
+            <ComboBoxItem Content="Linux"/>
+            <ComboBoxItem Content="Windows"/>
+            <ComboBoxItem Content="macOS"/>
+            <ComboBoxItem Content="Unix"/>
+          </ComboBox>
+          <TextBlock Text="Shell Type:" VerticalAlignment="Center" Margin="20,0,0,0"/>
+          <ComboBox x:Name="ShellTypeCombo" Width="120" SelectedIndex="0">
+            <ComboBoxItem Content="Bash"/>
+            <ComboBoxItem Content="PowerShell"/>
+            <ComboBoxItem Content="Python"/>
+            <ComboBoxItem Content="Netcat"/>
+            <ComboBoxItem Content="Perl"/>
+            <ComboBoxItem Content="PHP"/>
+          </ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Listener IP:" VerticalAlignment="Center"/>
+          <TextBox x:Name="ListenerIpBox" Text="127.0.0.1" Width="120"/>
+          <TextBlock Text="Port:" VerticalAlignment="Center" Margin="20,0,0,0"/>
+          <TextBox x:Name="ListenerPortBox" Text="4444" Width="80"/>
+          <Button x:Name="GenerateShellBtn" Content="Generate Shell" Width="120" Background="#0078D4" Foreground="White"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Custom Wordlist Generation -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Custom Wordlist Generation" FontWeight="SemiBold" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Base Words:" VerticalAlignment="Center"/>
+          <TextBox x:Name="BaseWordsBox" Watermark="admin, password, user" Width="200"/>
+          <TextBlock Text="Years:" VerticalAlignment="Center" Margin="20,0,0,0"/>
+          <TextBox x:Name="YearsBox" Text="2020-2024" Width="80"/>
+          <Button x:Name="GenerateWordlistBtn" Content="Generate Wordlist" Width="140" Background="#4CAF50" Foreground="White"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <CheckBox x:Name="IncludeNumbersCheck" Content="Include Numbers" IsChecked="True"/>
+          <CheckBox x:Name="IncludeSpecialCharsCheck" Content="Special Characters"/>
+          <CheckBox x:Name="IncludeCommonPatternsCheck" Content="Common Patterns" IsChecked="True"/>
+          <CheckBox x:Name="IncludeLeetSpeakCheck" Content="Leet Speak"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Fuzzing Templates -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Fuzzing Templates for Different Attack Vectors" FontWeight="SemiBold" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <ComboBox x:Name="FuzzingTemplateCombo" Width="200" SelectedIndex="0">
+            <ComboBoxItem Content="Buffer Overflow Patterns"/>
+            <ComboBoxItem Content="SQL Injection Vectors"/>
+            <ComboBoxItem Content="XSS Test Strings"/>
+            <ComboBoxItem Content="Path Traversal Payloads"/>
+            <ComboBoxItem Content="Format String Bugs"/>
+            <ComboBoxItem Content="XXE Injection"/>
+            <ComboBoxItem Content="SSRF Payloads"/>
+            <ComboBoxItem Content="Command Injection"/>
+          </ComboBox>
+          <Button x:Name="LoadFuzzTemplateBtn" Content="Load Template" Width="120"/>
+          <Button x:Name="CustomizeFuzzBtn" Content="Customize" Width="100" Background="#FF9800" Foreground="White"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Encoding and Obfuscation -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Encoding &amp; Obfuscation Options" FontWeight="SemiBold" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <CheckBox x:Name="Base64EncodeCheck" Content="Base64 Encoding"/>
+          <CheckBox x:Name="UrlEncodeCheck" Content="URL Encoding"/>
+          <CheckBox x:Name="HexEncodeCheck" Content="Hex Encoding"/>
+          <CheckBox x:Name="UnicodeEncodeCheck" Content="Unicode Encoding"/>
+          <CheckBox x:Name="DoubleEncodeCheck" Content="Double Encoding"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <CheckBox x:Name="CaseVariationCheck" Content="Case Variations"/>
+          <CheckBox x:Name="CommentInjectionCheck" Content="Comment Injection"/>
+          <CheckBox x:Name="WhitespaceVariationCheck" Content="Whitespace Variations"/>
+          <Button x:Name="ApplyEncodingBtn" Content="Apply Encoding" Width="120" Background="#9C27B0" Foreground="White"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Generated Payloads Display -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Generated Payloads" FontWeight="SemiBold" FontSize="16"/>
+        <TabControl x:Name="PayloadTabView" Height="300">
+          <TabItem Header="Payloads">
+            <ScrollViewer>
+              <TextBox x:Name="PayloadsBox" AcceptsReturn="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#00FF00"/>
+            </ScrollViewer>
+          </TabItem>
+          <TabItem Header="Reverse Shells">
+            <ScrollViewer>
+              <TextBox x:Name="ReverseShellBox" AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#FFD700"/>
+            </ScrollViewer>
+          </TabItem>
+          <TabItem Header="Wordlists">
+            <ScrollViewer>
+              <TextBox x:Name="WordlistBox" AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#87CEEB"/>
+            </ScrollViewer>
+          </TabItem>
+          <TabItem Header="Encoded Payloads">
+            <ScrollViewer>
+              <TextBox x:Name="EncodedPayloadsBox" AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#98FB98"/>
+            </ScrollViewer>
+          </TabItem>
+        </TabControl>
+      </StackPanel>
+
+      <!-- Payload Testing -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Payload Testing" FontWeight="SemiBold" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Test URL:" VerticalAlignment="Center"/>
+          <TextBox x:Name="TestUrlBox" Watermark="http://target.com/vulnerable.php?param=" Width="300"/>
+          <Button x:Name="TestPayloadsBtn" Content="Test Payloads" Width="120" Background="#F44336" Foreground="White"/>
+          <Button x:Name="BulkTestBtn" Content="Bulk Test" Width="100" Background="#FF5722" Foreground="White"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Export and Actions -->
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <Button x:Name="ExportPayloadsBtn" Content="Export Payloads" Width="120" Background="#4CAF50" Foreground="White"/>
+        <Button x:Name="SaveTemplateBtn" Content="Save Template" Width="120"/>
+        <Button x:Name="LoadTemplateBtn" Content="Load Template" Width="120"/>
+        <Button x:Name="ClearAllBtn" Content="Clear All" Width="100" Background="#9E9E9E" Foreground="White"/>
+      </StackPanel>
+
+      <TextBlock x:Name="StatusText" Text="Ready to generate payloads..." Foreground="Gray" Margin="0,16,0,0"/>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

@@ -1,0 +1,106 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ProgrammersToolKit.Views.ApiSecurityTestView"
+             x:CompileBindings="False">
+  <ScrollViewer>
+    <StackPanel Margin="24" Spacing="16">
+      <TextBlock Text="API Security Testing Suite" FontWeight="Bold" FontSize="20"/>
+      
+      <!-- Target Configuration -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Target API Configuration" FontWeight="SemiBold" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Base URL:" VerticalAlignment="Center" Width="80"/>
+          <TextBox x:Name="BaseUrlBox" Watermark="https://api.target.com" Width="300"/>
+          <Button x:Name="ValidateEndpointBtn" Content="Validate" Width="80"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Auth Token:" VerticalAlignment="Center" Width="80"/>
+          <TextBox x:Name="AuthTokenBox" Watermark="Bearer token or API key" Width="300"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Automated Vulnerability Scans -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Automated Vulnerability Scanning" FontWeight="SemiBold" FontSize="16"/>
+        <WrapPanel Orientation="Horizontal" ItemWidth="180" ItemHeight="40">
+          <Button x:Name="SqlInjectionScanBtn" Content="SQL Injection Scan" Background="#FF4444" Foreground="White" Margin="4"/>
+          <Button x:Name="XssScanBtn" Content="XSS Vulnerability Scan" Background="#FF4444" Foreground="White" Margin="4"/>
+          <Button x:Name="AuthBypassScanBtn" Content="Auth Bypass Tests" Background="#FF6666" Foreground="White" Margin="4"/>
+          <Button x:Name="InjectionScanBtn" Content="Injection Tests" Background="#FF8888" Foreground="White" Margin="4"/>
+          <Button x:Name="BrokenAuthScanBtn" Content="Broken Authentication" Background="#FF6666" Foreground="White" Margin="4"/>
+          <Button x:Name="DataExposureScanBtn" Content="Data Exposure Tests" Background="#FFAA44" Foreground="White" Margin="4"/>
+        </WrapPanel>
+      </StackPanel>
+
+      <!-- Custom Payload Testing -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Custom Payload Testing" FontWeight="SemiBold" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <ComboBox x:Name="PayloadTypeCombo" Width="150" SelectedIndex="0">
+            <ComboBoxItem Content="SQL Injection"/>
+            <ComboBoxItem Content="XSS Payloads"/>
+            <ComboBoxItem Content="Command Injection"/>
+            <ComboBoxItem Content="LDAP Injection"/>
+            <ComboBoxItem Content="XML Injection"/>
+            <ComboBoxItem Content="NoSQL Injection"/>
+          </ComboBox>
+          <Button x:Name="LoadPayloadsBtn" Content="Load Payloads" Width="100"/>
+          <Button x:Name="TestPayloadsBtn" Content="Test All Payloads" Width="120" Background="#0078D4" Foreground="White"/>
+        </StackPanel>
+        <TextBox x:Name="CustomPayloadBox" AcceptsReturn="True" Height="80" Watermark="Enter custom payloads, one per line..." FontFamily="Consolas"/>
+      </StackPanel>
+
+      <!-- API Fuzzing -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="API Fuzzing" FontWeight="SemiBold" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Intensity:" VerticalAlignment="Center"/>
+          <ComboBox x:Name="FuzzIntensityCombo" Width="100" SelectedIndex="1">
+            <ComboBoxItem Content="Light"/>
+            <ComboBoxItem Content="Medium"/>
+            <ComboBoxItem Content="Heavy"/>
+            <ComboBoxItem Content="Extreme"/>
+          </ComboBox>
+          <TextBlock Text="Endpoints:" VerticalAlignment="Center" Margin="20,0,0,0"/>
+          <TextBox x:Name="EndpointListBox" Width="200" Watermark="/api/users, /api/data, etc."/>
+          <Button x:Name="StartFuzzingBtn" Content="Start Fuzzing" Width="100" Background="#FF9800" Foreground="White"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Security Analysis Results -->
+      <StackPanel Spacing="8">
+        <TextBlock Text="Security Analysis &amp; Reporting" FontWeight="SemiBold" FontSize="16"/>
+        <TabControl x:Name="ResultsTabView" Height="300">
+          <TabItem Header="Vulnerability Report">
+            <ScrollViewer>
+              <TextBox x:Name="VulnerabilityReportBox" AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#D4D4D4"/>
+            </ScrollViewer>
+          </TabItem>
+          <TabItem Header="Security Score">
+            <StackPanel Spacing="10" Margin="10">
+              <TextBlock x:Name="SecurityScoreText" Text="Security Score: Not tested" FontSize="18" FontWeight="Bold"/>
+              <ProgressBar x:Name="SecurityScoreBar" Height="20" Background="#333" Foreground="#4CAF50"/>
+              <TextBlock x:Name="SecurityRecommendationsText" Text="Run security scans to get recommendations..." Foreground="Gray"/>
+            </StackPanel>
+          </TabItem>
+          <TabItem Header="Raw Results">
+            <ScrollViewer>
+              <TextBox x:Name="RawResultsBox" AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#00FF00"/>
+            </ScrollViewer>
+          </TabItem>
+        </TabControl>
+      </StackPanel>
+
+      <!-- Export/Import -->
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <Button x:Name="ExportReportBtn" Content="Export Report" Width="120" Background="#4CAF50" Foreground="White"/>
+        <Button x:Name="ImportConfigBtn" Content="Import Config" Width="120"/>
+        <Button x:Name="SaveConfigBtn" Content="Save Config" Width="120"/>
+        <Button x:Name="ClearResultsBtn" Content="Clear Results" Width="120" Background="#F44336" Foreground="White"/>
+      </StackPanel>
+
+      <TextBlock x:Name="StatusText" Text="Ready for security testing..." Foreground="Gray" Margin="0,16,0,0"/>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>
