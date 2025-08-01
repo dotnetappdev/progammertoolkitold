@@ -22,7 +22,7 @@ namespace ProgrammersToolKit.Views
                 new GeneralView(),            // 5 - placeholder for CodeEditorView
                 new EncryptionToolsView(),    // 6 - EncryptionToolsView (converted)
                 new GeneralView(),            // 7 - placeholder for RdpView
-                new GeneralView(),            // 8 - placeholder for ApiTesterView
+                new ApiTesterView(),          // 8 - ApiTesterView (converted)
                 new GeneralView(),            // 9 - placeholder for JsonQueryView
                 new GeneralView(),            // 10 - placeholder for DiffEditorView
                 new NotepadView(),            // 11 - NotepadView (converted)
