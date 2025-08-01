@@ -1,7 +1,7 @@
-<!-- This file is now the FTP Client view, previously FileZillaView -->
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="ProgrammersToolKit.Views.FtpClientView">
+  <!-- This file is now the FTP Client view, previously FileZillaView -->
   <StackPanel Margin="32" Spacing="12">
     <TextBlock Text="FTP Client" FontWeight="Bold" FontSize="{DynamicResource FontSizeLarge}" Foreground="{DynamicResource TextColor}"/>
     <StackPanel Orientation="Horizontal" Spacing="8">
