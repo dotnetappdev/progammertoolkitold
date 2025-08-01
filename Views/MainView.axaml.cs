@@ -2,8 +2,6 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using System;
-using ApiTesterView = ProgrammersToolKit.Views.ApiTesterView;
-using JsonQueryView = ProgrammersToolKit.Views.JsonQueryView;
 
 namespace ProgrammersToolKit.Views
 {
