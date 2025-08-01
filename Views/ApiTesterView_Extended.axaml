@@ -2,57 +2,269 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="ProgrammersToolKit.Views.ApiTesterView_Extended"
              x:CompileBindings="False">
-  <DockPanel Margin="24">
-    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,0,0,12">
-      <TextBlock Text="API Tester (Extended)" FontWeight="Bold" FontSize="20"/>
-      <Button x:Name="NewApiCallBtn" Content="New" Width="60"/>
-      <Button x:Name="SaveApiCallBtn" Content="Save" Width="60"/>
-      <Button x:Name="DeleteApiCallBtn" Content="Delete" Width="60"/>
-      <Button x:Name="SendApiCallBtn" Content="Send" Width="80" Background="#0078D4" Foreground="White" FontWeight="Bold"/>
+  <ScrollViewer>
+    <StackPanel Margin="24" Spacing="16">
+      <TextBlock Text="Advanced API Testing &amp; Security Suite" FontWeight="Bold" FontSize="20"/>
+      
+      <!-- Quick Actions Header -->
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <Button x:Name="NewApiCallBtn" Content="New" Width="60"/>
+        <Button x:Name="SaveApiCallBtn" Content="Save" Width="60"/>
+        <Button x:Name="DeleteApiCallBtn" Content="Delete" Width="60"/>
+        <Button x:Name="SendApiCallBtn" Content="Send" Width="80" Background="#0078D4" Foreground="White" FontWeight="Bold"/>
+        <Button x:Name="SecurityScanBtn" Content="Security Scan" Width="120" Background="#F44336" Foreground="White"/>
+        <Button x:Name="LoadTestBtn" Content="Load Test" Width="100" Background="#FF9800" Foreground="White"/>
+      </StackPanel>
+
+      <TabControl x:Name="MainTabControl" Height="700">
+        <!-- Basic API Testing Tab -->
+        <TabItem Header="🔗 Basic Testing">
+          <Grid ColumnDefinitions="*,*" Margin="10">
+            <StackPanel Grid.Column="0" Spacing="8" Margin="0,0,10,0">
+              <TextBlock Text="Saved API Calls" FontWeight="SemiBold"/>
+              <ListBox x:Name="SavedApiCallsListBox" Height="120"/>
+              
+              <TextBlock Text="Endpoint Configuration" FontWeight="SemiBold"/>
+              <TextBox x:Name="ApiUrlBox" Watermark="https://api.example.com/endpoint"/>
+              
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <ComboBox x:Name="HttpMethodCombo" Width="100" SelectedIndex="0">
+                  <ComboBoxItem Content="GET"/>
+                  <ComboBoxItem Content="POST"/>
+                  <ComboBoxItem Content="PUT"/>
+                  <ComboBoxItem Content="DELETE"/>
+                  <ComboBoxItem Content="PATCH"/>
+                  <ComboBoxItem Content="HEAD"/>
+                  <ComboBoxItem Content="OPTIONS"/>
+                </ComboBox>
+                <TextBlock Text="Timeout (ms):" VerticalAlignment="Center"/>
+                <NumericUpDown x:Name="TimeoutUpDown" Value="30000" Minimum="1000" Maximum="300000" Width="100"/>
+              </StackPanel>
+
+              <CheckBox x:Name="IgnoreSslErrorsCheck" Content="Ignore SSL Certificate Errors"/>
+              
+              <TextBlock Text="Headers" FontWeight="SemiBold"/>
+              <DataGrid x:Name="HeadersGrid" AutoGenerateColumns="False" Height="100">
+                <DataGrid.Columns>
+                  <DataGridTextColumn Header="Key" Binding="{Binding Key}" Width="*"/>
+                  <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="2*"/>
+                </DataGrid.Columns>
+              </DataGrid>
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Name="AddHeaderBtn" Content="Add Header" Width="100"/>
+                <Button x:Name="AddAuthHeaderBtn" Content="Add Auth" Width="100" Background="#4CAF50" Foreground="White"/>
+                <Button x:Name="AddCorsHeaderBtn" Content="Add CORS" Width="100"/>
+              </StackPanel>
+              
+              <TextBlock Text="Request Body" FontWeight="SemiBold"/>
+              <TextBox x:Name="RequestBodyBox" AcceptsReturn="True" Height="120" FontFamily="Consolas"/>
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Name="FormatJsonBtn" Content="Format JSON" Width="100"/>
+                <Button x:Name="ValidateJsonBtn" Content="Validate JSON" Width="100"/>
+                <Button x:Name="MinifyJsonBtn" Content="Minify" Width="80"/>
+              </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="1" Spacing="8" Margin="10,0,0,0">
+              <TextBlock Text="Response Analysis" FontWeight="SemiBold"/>
+              <TabControl x:Name="ResponseTabControl" Height="500">
+                <TabItem Header="Body">
+                  <TextBox x:Name="ResponseBox" AcceptsReturn="True" FontFamily="Consolas" IsReadOnly="True" Background="#1E1E1E" Foreground="#00FF00"/>
+                </TabItem>
+                <TabItem Header="Headers">
+                  <TextBox x:Name="ResponseHeadersBox" AcceptsReturn="True" FontFamily="Consolas" IsReadOnly="True" Background="#1E1E1E" Foreground="#87CEEB"/>
+                </TabItem>
+                <TabItem Header="Performance">
+                  <StackPanel Spacing="8" Margin="10">
+                    <TextBlock x:Name="ResponseTimeText" Text="Response Time: -" FontWeight="Bold"/>
+                    <TextBlock x:Name="StatusCodeText" Text="Status Code: -" FontWeight="Bold"/>
+                    <TextBlock x:Name="ContentLengthText" Text="Content Length: -"/>
+                    <TextBlock x:Name="ContentTypeText" Text="Content Type: -"/>
+                    <TextBlock Text="Performance Metrics:" FontWeight="Bold" Margin="0,10,0,0"/>
+                    <TextBox x:Name="PerformanceMetricsBox" AcceptsReturn="True" Height="200" IsReadOnly="True" FontFamily="Consolas"/>
+                  </StackPanel>
+                </TabItem>
+                <TabItem Header="Security Analysis">
+                  <StackPanel Spacing="8" Margin="10">
+                    <TextBlock Text="Security Headers Analysis:" FontWeight="Bold"/>
+                    <TextBox x:Name="SecurityAnalysisBox" AcceptsReturn="True" Height="300" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#FFD700"/>
+                    <Button x:Name="AnalyzeSecurityBtn" Content="Analyze Security Headers" Width="180" Background="#9C27B0" Foreground="White"/>
+                  </StackPanel>
+                </TabItem>
+              </TabControl>
+            </StackPanel>
+          </Grid>
+        </TabItem>
+
+        <!-- Authentication Tab -->
+        <TabItem Header="🔐 Authentication">
+          <StackPanel Spacing="12" Margin="10">
+            <TextBlock Text="Authentication Configuration" FontWeight="SemiBold" FontSize="16"/>
+            
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <TextBlock Text="Auth Type:" VerticalAlignment="Center"/>
+              <ComboBox x:Name="AuthTypeCombo" Width="150" SelectedIndex="0">
+                <ComboBoxItem Content="None"/>
+                <ComboBoxItem Content="Bearer Token"/>
+                <ComboBoxItem Content="Basic Auth"/>
+                <ComboBoxItem Content="API Key"/>
+                <ComboBoxItem Content="OAuth 2.0"/>
+                <ComboBoxItem Content="JWT"/>
+                <ComboBoxItem Content="Custom"/>
+              </ComboBox>
+            </StackPanel>
+
+            <StackPanel x:Name="BearerTokenPanel" Spacing="8">
+              <TextBlock Text="Bearer Token" FontWeight="SemiBold"/>
+              <TextBox x:Name="BearerTokenBox" Watermark="Enter bearer token..." Width="400"/>
+            </StackPanel>
+
+            <StackPanel x:Name="BasicAuthPanel" Spacing="8">
+              <TextBlock Text="Basic Authentication" FontWeight="SemiBold"/>
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBox x:Name="BasicAuthUserBox" Watermark="Username" Width="150"/>
+                <TextBox x:Name="BasicAuthPassBox" Watermark="Password" Width="150" PasswordChar="*"/>
+                <Button x:Name="EncodeBasicAuthBtn" Content="Encode" Width="80"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel x:Name="ApiKeyPanel" Spacing="8">
+              <TextBlock Text="API Key Authentication" FontWeight="SemiBold"/>
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBox x:Name="ApiKeyNameBox" Watermark="Key name (e.g., X-API-Key)" Width="150"/>
+                <TextBox x:Name="ApiKeyValueBox" Watermark="Key value" Width="200"/>
+                <ComboBox x:Name="ApiKeyLocationCombo" Width="100" SelectedIndex="0">
+                  <ComboBoxItem Content="Header"/>
+                  <ComboBoxItem Content="Query"/>
+                  <ComboBoxItem Content="Body"/>
+                </ComboBox>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel x:Name="OAuth2Panel" Spacing="8">
+              <TextBlock Text="OAuth 2.0 Configuration" FontWeight="SemiBold"/>
+              <StackPanel Spacing="8">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <TextBox x:Name="OAuth2TokenUrlBox" Watermark="Token URL" Width="200"/>
+                  <TextBox x:Name="OAuth2ClientIdBox" Watermark="Client ID" Width="150"/>
+                  <TextBox x:Name="OAuth2ClientSecretBox" Watermark="Client Secret" Width="150" PasswordChar="*"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <TextBox x:Name="OAuth2ScopeBox" Watermark="Scope (optional)" Width="200"/>
+                  <Button x:Name="GetOAuth2TokenBtn" Content="Get Token" Width="100" Background="#4CAF50" Foreground="White"/>
+                </StackPanel>
+              </StackPanel>
+            </StackPanel>
+          </StackPanel>
+        </TabItem>
+
+        <!-- Load Testing Tab -->
+        <TabItem Header="⚡ Load Testing">
+          <StackPanel Spacing="12" Margin="10">
+            <TextBlock Text="Load Testing Configuration" FontWeight="SemiBold" FontSize="16"/>
+            
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <TextBlock Text="Concurrent Users:" VerticalAlignment="Center"/>
+              <NumericUpDown x:Name="ConcurrentUsersUpDown" Value="10" Minimum="1" Maximum="1000" Width="80"/>
+              <TextBlock Text="Total Requests:" VerticalAlignment="Center" Margin="20,0,0,0"/>
+              <NumericUpDown x:Name="TotalRequestsUpDown" Value="100" Minimum="1" Maximum="10000" Width="80"/>
+              <TextBlock Text="Duration (sec):" VerticalAlignment="Center" Margin="20,0,0,0"/>
+              <NumericUpDown x:Name="TestDurationUpDown" Value="60" Minimum="1" Maximum="3600" Width="80"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <TextBlock Text="Ramp-up Time (sec):" VerticalAlignment="Center"/>
+              <NumericUpDown x:Name="RampUpTimeUpDown" Value="10" Minimum="0" Maximum="300" Width="80"/>
+              <CheckBox x:Name="RandomDelayCheck" Content="Random Delay Between Requests" Margin="20,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button x:Name="StartLoadTestBtn" Content="Start Load Test" Width="120" Background="#FF9800" Foreground="White"/>
+              <Button x:Name="StopLoadTestBtn" Content="Stop Test" Width="100" Background="#F44336" Foreground="White"/>
+              <ProgressBar x:Name="LoadTestProgressBar" Width="200" Height="20"/>
+            </StackPanel>
+
+            <TextBlock Text="Load Test Results" FontWeight="SemiBold" Margin="0,20,0,0"/>
+            <TextBox x:Name="LoadTestResultsBox" AcceptsReturn="True" Height="300" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#00FF00"/>
+          </StackPanel>
+        </TabItem>
+
+        <!-- Security Testing Tab -->
+        <TabItem Header="🛡️ Security Testing">
+          <StackPanel Spacing="12" Margin="10">
+            <TextBlock Text="Automated Security Testing" FontWeight="SemiBold" FontSize="16"/>
+            
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button x:Name="SqlInjectionTestBtn" Content="SQL Injection Test" Width="140" Background="#FF4444" Foreground="White"/>
+              <Button x:Name="XssTestBtn" Content="XSS Test" Width="100" Background="#FF6666" Foreground="White"/>
+              <Button x:Name="AuthBypassTestBtn" Content="Auth Bypass" Width="120" Background="#FF8888" Foreground="White"/>
+              <Button x:Name="InjectionTestBtn" Content="Other Injections" Width="140" Background="#FFAA44" Foreground="White"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button x:Name="FuzzTestBtn" Content="Parameter Fuzzing" Width="140" Background="#9C27B0" Foreground="White"/>
+              <Button x:Name="HeadersTestBtn" Content="Header Analysis" Width="120" Background="#607D8B" Foreground="White"/>
+              <Button x:Name="MethodTestBtn" Content="HTTP Methods" Width="120" Background="#795548" Foreground="White"/>
+              <Button x:Name="RateLimitTestBtn" Content="Rate Limiting" Width="120" Background="#2196F3" Foreground="White"/>
+            </StackPanel>
+
+            <TextBlock Text="Security Test Results" FontWeight="SemiBold" Margin="0,20,0,0"/>
+            <TabControl x:Name="SecurityResultsTabControl" Height="300">
+              <TabItem Header="Vulnerabilities">
+                <TextBox x:Name="VulnerabilitiesBox" AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#FF4444"/>
+              </TabItem>
+              <TabItem Header="Security Score">
+                <StackPanel Spacing="10" Margin="10">
+                  <TextBlock x:Name="SecurityScoreText" Text="Security Score: Not tested" FontSize="16" FontWeight="Bold"/>
+                  <ProgressBar x:Name="SecurityScoreBar" Height="20" Background="#333" Foreground="#4CAF50"/>
+                  <TextBlock x:Name="SecurityRecommendationsText" Text="Run security tests to get recommendations..." Foreground="Gray"/>
+                </StackPanel>
+              </TabItem>
+              <TabItem Header="Detailed Report">
+                <TextBox x:Name="DetailedSecurityReportBox" AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#D4D4D4"/>
+              </TabItem>
+            </TabControl>
+          </StackPanel>
+        </TabItem>
+
+        <!-- Test Automation Tab -->
+        <TabItem Header="🤖 Test Automation">
+          <StackPanel Spacing="12" Margin="10">
+            <TextBlock Text="Automated Test Suites" FontWeight="SemiBold" FontSize="16"/>
+            
+            <TextBlock Text="Value Assertions (JSONPath)" FontWeight="SemiBold"/>
+            <DataGrid x:Name="AssertionsGrid" AutoGenerateColumns="False" Height="120">
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="JSONPath" Binding="{Binding Path}" Width="2*"/>
+                <DataGridTextColumn Header="Expected Value" Binding="{Binding ExpectedValue}" Width="2*"/>
+                <DataGridTextColumn Header="Operator" Binding="{Binding Operator}" Width="100"/>
+              </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button x:Name="AddAssertionBtn" Content="Add Assertion" Width="120"/>
+              <Button x:Name="RunAssertionsBtn" Content="Run All Assertions" Width="140" Background="#4CAF50" Foreground="White"/>
+            </StackPanel>
+
+            <TextBlock Text="Benchmark &amp; Performance Testing" FontWeight="SemiBold" Margin="0,20,0,0"/>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button x:Name="BenchmarkBtn" Content="Benchmark API" Width="120" Background="#2196F3" Foreground="White"/>
+              <Button x:Name="ResponseTimeTestBtn" Content="Response Time Test" Width="150" Background="#00BCD4" Foreground="White"/>
+              <Button x:Name="ThroughputTestBtn" Content="Throughput Test" Width="130" Background="#009688" Foreground="White"/>
+            </StackPanel>
+
+            <TextBlock Text="Test Results &amp; Reports" FontWeight="SemiBold" Margin="0,20,0,0"/>
+            <TextBox x:Name="TestResultsBox" AcceptsReturn="True" Height="200" IsReadOnly="True" FontFamily="Consolas" Background="#1E1E1E" Foreground="#00FF00"/>
+            
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button x:Name="ExportResultsBtn" Content="Export Results" Width="120" Background="#4CAF50" Foreground="White"/>
+              <Button x:Name="GenerateReportBtn" Content="Generate Report" Width="130"/>
+              <Button x:Name="ClearResultsBtn" Content="Clear Results" Width="120" Background="#F44336" Foreground="White"/>
+            </StackPanel>
+          </StackPanel>
+        </TabItem>
+      </TabControl>
+      
+      <TextBlock x:Name="StatusText" Text="Ready for advanced API testing..." Foreground="Gray"/>
     </StackPanel>
-    <Grid ColumnDefinitions="2*,3*" RowDefinitions="Auto,Auto,*,2*">
-      <!-- Left: API Call Editor -->
-      <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Spacing="10">
-        <TextBlock Text="Saved Calls" FontWeight="SemiBold"/>
-        <ListBox x:Name="SavedApiCallsListBox" Height="120"/>
-        <TextBlock Text="Endpoint URL" FontWeight="SemiBold"/>
-        <TextBox x:Name="ApiUrlBox"/>
-        <TextBlock Text="HTTP Method" FontWeight="SemiBold"/>
-        <ComboBox x:Name="HttpMethodCombo" SelectedIndex="0">
-          <ComboBoxItem Content="GET"/>
-          <ComboBoxItem Content="POST"/>
-          <ComboBoxItem Content="PUT"/>
-          <ComboBoxItem Content="DELETE"/>
-          <ComboBoxItem Content="PATCH"/>
-        </ComboBox>
-        <TextBlock Text="Headers" FontWeight="SemiBold"/>
-        <DataGrid x:Name="HeadersGrid" AutoGenerateColumns="False" Height="80">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Key" Binding="{Binding Key}" Width="*"/>
-            <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="2*"/>
-          </DataGrid.Columns>
-        </DataGrid>
-        <TextBlock Text="Request Body (JSON/XML)" FontWeight="SemiBold"/>
-        <TextBox x:Name="RequestBodyBox" AcceptsReturn="True" Height="80" FontFamily="Consolas"/>
-        <TextBlock Text="Expected Status Code" FontWeight="SemiBold"/>
-        <TextBox x:Name="ExpectedStatusBox" Width="80"/>
-        <TextBlock Text="Value Assertions" FontWeight="SemiBold"/>
-        <DataGrid x:Name="AssertionsGrid" AutoGenerateColumns="False" Height="80">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="JSONPath" Binding="{Binding Path}" Width="2*"/>
-            <DataGridTextColumn Header="Expected Value" Binding="{Binding ExpectedValue}" Width="2*"/>
-          </DataGrid.Columns>
-        </DataGrid>
-      </StackPanel>
-      <!-- Right: Response Display -->
-      <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Spacing="10">
-        <TextBlock Text="Response" FontWeight="SemiBold"/>
-        <TextBox x:Name="ResponseBox" AcceptsReturn="True" Height="180" FontFamily="Consolas" IsReadOnly="True" Background="#181818" Foreground="Lime"/>
-        <TextBlock Text="Response Headers" FontWeight="SemiBold"/>
-        <TextBox x:Name="ResponseHeadersBox" AcceptsReturn="True" Height="60" FontFamily="Consolas" IsReadOnly="True"/>
-        <TextBlock Text="Test Results" FontWeight="SemiBold"/>
-        <TextBox x:Name="TestResultsBox" AcceptsReturn="True" Height="60" FontFamily="Consolas" IsReadOnly="True"/>
-      </StackPanel>
-    </Grid>
-  </DockPanel>
+  </ScrollViewer>
 </UserControl>

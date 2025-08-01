@@ -4,7 +4,7 @@
   <DockPanel>
     <!-- Sidebar -->
     <StackPanel DockPanel.Dock="Left" Width="220" Background="#F3F3F3">
-      <TextBlock Text="ScreenShare  Control" FontWeight="Bold" FontSize="20" Margin="16"/>
+      <TextBlock Text="Programmer's Toolkit" FontWeight="Bold" FontSize="18" Margin="16,16,16,8"/>
         <ListBox x:Name="Sidebar" SelectedIndex="0">
           <ListBoxItem Content="General"/>
           <ListBoxItem Content="Monitor Sharing"/>
@@ -23,19 +23,24 @@
           </ListBoxItem>
           <ListBoxItem Content="RDP"/>
           <ListBoxItem Content="API Tester"/>
+          <ListBoxItem Content="Advanced API Testing"/>
+          <ListBoxItem Content="API Security Testing"/>
           <ListBoxItem Content="JSON Query/Visualizer"/>
           <ListBoxItem Content="Diff Editor"/>
           <ListBoxItem Content="Notepad"/>
           <ListBoxItem Content="CTF Tools"/>
+          <ListBoxItem Content="Network Scanner"/>
+          <ListBoxItem Content="Payload Generator"/>
           <ListBoxItem Content="Text Stripper"/>
           <ListBoxItem Content="Settings"/>
         </ListBox>
       <StackPanel Margin="0,24,0,0" Spacing="6">
-        <TextBlock Text="Capture The Flag Tools" FontWeight="Bold" FontSize="15" Margin="8,0,0,0"/>
-        <Button Name="SidebarInspectHeadersBtn" Content="Inspect Last HTTP Response Headers" Height="32" Margin="8,0,8,0"/>
-        <Button Name="SidebarJwtDecodeBtn" Content="Decode JWT Token" Height="32" Margin="8,0,8,0"/>
-        <Button Name="SidebarHashCrackBtn" Content="Hash/Crack Tool (Stub)" Height="32" Margin="8,0,8,0"/>
-        <Button Name="SidebarCookieDecodeBtn" Content="Cookie/Claims Decoder" Height="32" Margin="8,0,8,0"/>
+        <TextBlock Text="Security Tools Quick Access" FontWeight="Bold" FontSize="14" Margin="8,0,0,0"/>
+        <Button Name="SidebarSecurityScanBtn" Content="🛡️ Security Scan" Height="32" Margin="8,0,8,0" Background="#F44336" Foreground="White"/>
+        <Button Name="SidebarNetworkScanBtn" Content="🔍 Network Scan" Height="32" Margin="8,0,8,0" Background="#2196F3" Foreground="White"/>
+        <Button Name="SidebarPayloadGenBtn" Content="💥 Payload Generator" Height="32" Margin="8,0,8,0" Background="#FF9800" Foreground="White"/>
+        <Button Name="SidebarJwtDecodeBtn" Content="🔐 Decode JWT Token" Height="32" Margin="8,0,8,0" Background="#4CAF50" Foreground="White"/>
+        <Button Name="SidebarHashCrackBtn" Content="🔨 Hash/Crack Tool" Height="32" Margin="8,0,8,0" Background="#9C27B0" Foreground="White"/>
       </StackPanel>
       <ToggleSwitch Content="Dark Mode" Margin="16,32,16,0"/>
     </StackPanel>

@@ -1,11 +1,83 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="ProgrammersToolKit.Views.CtfToolsView">
-  <StackPanel Margin="16" Spacing="12">
-    <TextBlock Text="Capture The Flag (CTF) Tools" FontWeight="Bold" FontSize="20" Margin="0,0,0,8"/>
-    <Button Name="InspectHeadersBtn" Content="Inspect Last HTTP Response Headers" Height="36"/>
-    <Button Name="JwtDecodeBtn" Content="Decode JWT Token" Height="36"/>
-    <Button Name="HashCrackBtn" Content="Hash/Crack Tool (Stub)" Height="36"/>
-    <TextBlock Name="CtfStatusBlock" FontSize="14" Foreground="Gray"/>
-  </StackPanel>
+             x:Class="ProgrammersToolKit.Views.CtfToolsView"
+             x:CompileBindings="False">
+  <ScrollViewer>
+    <StackPanel Margin="16" Spacing="12">
+      <TextBlock Text="Capture The Flag (CTF) &amp; Security Tools" FontWeight="Bold" FontSize="20" Margin="0,0,0,8"/>
+      
+      <!-- Web Security Section -->
+      <Expander Header="🌐 Web Security Tools" IsExpanded="True">
+        <StackPanel Spacing="8" Margin="10">
+          <Button Name="SqlInjectionBtn" Content="SQL Injection Payloads" Height="36" Background="#FF4444" Foreground="White"/>
+          <Button Name="XssPayloadsBtn" Content="XSS Payload Generator" Height="36" Background="#FF4444" Foreground="White"/>
+          <Button Name="DirectoryBruteBtn" Content="Directory Bruteforce" Height="36" Background="#FF6666" Foreground="White"/>
+          <Button Name="SubdomainEnumBtn" Content="Subdomain Enumeration" Height="36" Background="#FF6666" Foreground="White"/>
+        </StackPanel>
+      </Expander>
+
+      <!-- Cryptography Section -->
+      <Expander Header="🔐 Cryptography &amp; Encoding" IsExpanded="False">
+        <StackPanel Spacing="8" Margin="10">
+          <Button Name="JwtDecodeBtn" Content="JWT Token Decoder/Analyzer" Height="36" Background="#4CAF50" Foreground="White"/>
+          <Button Name="HashCrackBtn" Content="Hash Cracking Tools" Height="36" Background="#4CAF50" Foreground="White"/>
+          <Button Name="Base64Btn" Content="Base64 Encode/Decode" Height="36" Background="#81C784" Foreground="White"/>
+          <Button Name="UrlBtn" Content="URL Encode/Decode" Height="36" Background="#81C784" Foreground="White"/>
+          <Button Name="CipherAnalysisBtn" Content="Cipher Analysis" Height="36" Background="#66BB6A" Foreground="White"/>
+        </StackPanel>
+      </Expander>
+
+      <!-- Network &amp; Reconnaissance -->
+      <Expander Header="🔍 Network &amp; Reconnaissance" IsExpanded="False">
+        <StackPanel Spacing="8" Margin="10">
+          <Button Name="PortScanBtn" Content="Port Scanner" Height="36" Background="#2196F3" Foreground="White"/>
+          <Button Name="WhoisBtn" Content="WHOIS Lookup" Height="36" Background="#42A5F5" Foreground="White"/>
+          <Button Name="DnsLookupBtn" Content="DNS Lookup Tools" Height="36" Background="#64B5F6" Foreground="White"/>
+          <Button Name="BannerGrabBtn" Content="Banner Grabbing" Height="36" Background="#90CAF9" Foreground="Black"/>
+        </StackPanel>
+      </Expander>
+
+      <!-- Payload Generation -->
+      <Expander Header="💥 Payload Generation" IsExpanded="False">
+        <StackPanel Spacing="8" Margin="10">
+          <Button Name="ReverseShellBtn" Content="Reverse Shell Generator" Height="36" Background="#FF9800" Foreground="White"/>
+          <Button Name="PayloadEncodingBtn" Content="Payload Encoding/Obfuscation" Height="36" Background="#FFB74D" Foreground="White"/>
+          <Button Name="WordlistGenBtn" Content="Wordlist Generator" Height="36" Background="#FFCC02" Foreground="Black"/>
+          <Button Name="FuzzTemplatesBtn" Content="Fuzzing Templates" Height="36" Background="#FFD54F" Foreground="Black"/>
+        </StackPanel>
+      </Expander>
+
+      <!-- Forensics &amp; Analysis -->
+      <Expander Header="🔬 Forensics &amp; Analysis" IsExpanded="False">
+        <StackPanel Spacing="8" Margin="10">
+          <Button Name="FileAnalysisBtn" Content="File Analysis Tools" Height="36" Background="#9C27B0" Foreground="White"/>
+          <Button Name="SteganographyBtn" Content="Steganography Tools" Height="36" Background="#BA68C8" Foreground="White"/>
+          <Button Name="LogAnalysisBtn" Content="Log Analysis" Height="36" Background="#CE93D8" Foreground="Black"/>
+          <Button Name="MemoryDumpBtn" Content="Memory Dump Analysis" Height="36" Background="#E1BEE7" Foreground="Black"/>
+        </StackPanel>
+      </Expander>
+
+      <!-- OSINT Tools -->
+      <Expander Header="🕵️ OSINT (Open Source Intelligence)" IsExpanded="False">
+        <StackPanel Spacing="8" Margin="10">
+          <Button Name="EmailEnumBtn" Content="Email Enumeration" Height="36" Background="#607D8B" Foreground="White"/>
+          <Button Name="SocialMediaOsintBtn" Content="Social Media OSINT" Height="36" Background="#78909C" Foreground="White"/>
+          <Button Name="GoogleDorkingBtn" Content="Google Dorking Helper" Height="36" Background="#90A4AE" Foreground="Black"/>
+          <Button Name="MetadataExtractorBtn" Content="Metadata Extractor" Height="36" Background="#B0BEC5" Foreground="Black"/>
+        </StackPanel>
+      </Expander>
+
+      <!-- Legacy Tools -->
+      <Expander Header="🛠️ Quick Tools" IsExpanded="False">
+        <StackPanel Spacing="8" Margin="10">
+          <Button Name="InspectHeadersBtn" Content="Inspect Last HTTP Response Headers" Height="36" Background="#37474F" Foreground="White"/>
+          <Button Name="UuidBtn" Content="UUID Generator" Height="36" Background="#546E7A" Foreground="White"/>
+          <Button Name="RegexBtn" Content="Regex Tester" Height="36" Background="#607D8B" Foreground="White"/>
+          <Button Name="QuickHashBtn" Content="Quick Hash Generator" Height="36" Background="#78909C" Foreground="White"/>
+        </StackPanel>
+      </Expander>
+
+      <TextBlock Name="CtfStatusBlock" FontSize="14" Foreground="Gray" Margin="0,16,0,0"/>
+    </StackPanel>
+  </ScrollViewer>
 </UserControl>
