@@ -1,0 +1,82 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="screenshareav.Views.CtfToolsView">
+  <StackPanel Margin="32" Spacing="12">
+    <TextBlock Text="CTF (Capture The Flag) Tools" FontWeight="Bold" FontSize="18"/>
+    
+    <Expander Header="Cryptography Challenges" IsExpanded="True">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Cipher Tools:" FontWeight="SemiBold"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <ComboBox x:Name="CipherTypeCombo" Width="120" SelectedIndex="0">
+            <ComboBoxItem Content="Caesar Cipher"/>
+            <ComboBoxItem Content="ROT13"/>
+            <ComboBoxItem Content="Vigenère"/>
+            <ComboBoxItem Content="Base64"/>
+            <ComboBoxItem Content="Base32"/>
+            <ComboBoxItem Content="Hex"/>
+            <ComboBoxItem Content="Binary"/>
+            <ComboBoxItem Content="Morse Code"/>
+          </ComboBox>
+          <TextBox x:Name="CipherKeyTextBox" Watermark="Key (if needed)" Width="100"/>
+          <Button x:Name="CipherDecodeBtn" Content="Decode" Width="80"/>
+          <Button x:Name="CipherEncodeBtn" Content="Encode" Width="80"/>
+        </StackPanel>
+        <TextBox x:Name="CipherInputTextBox" Watermark="Enter cipher text here..." Height="60" AcceptsReturn="True"/>
+        <TextBox x:Name="CipherOutputTextBox" IsReadOnly="True" Height="60" AcceptsReturn="True" FontFamily="Consolas"/>
+      </StackPanel>
+    </Expander>
+    
+    <Expander Header="Forensics Tools">
+      <StackPanel Spacing="8">
+        <TextBlock Text="File Analysis:" FontWeight="SemiBold"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBox x:Name="ForensicsFilePathTextBox" Watermark="File path..." Width="300"/>
+          <Button x:Name="BrowseForensicsFileBtn" Content="Browse" Width="80"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="ExtractMetadataBtn" Content="Extract Metadata" Width="130"/>
+          <Button x:Name="FindHiddenDataBtn" Content="Find Hidden Data" Width="130"/>
+          <Button x:Name="StringsExtractBtn" Content="Extract Strings" Width="120"/>
+        </StackPanel>
+        <TextBox x:Name="ForensicsResultsTextBox" IsReadOnly="True" Height="120" 
+                 FontFamily="Consolas" AcceptsReturn="True"/>
+      </StackPanel>
+    </Expander>
+    
+    <Expander Header="Network Analysis">
+      <StackPanel Spacing="8">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBox x:Name="NetworkTargetTextBox" Watermark="Target IP/Domain" Width="200"/>
+          <Button x:Name="PingTestBtn" Content="Ping" Width="80"/>
+          <Button x:Name="PortScanBtn" Content="Port Scan" Width="80"/>
+          <Button x:Name="TraceRouteBtn" Content="Traceroute" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Port Range:" Width="80"/>
+          <TextBox x:Name="PortRangeTextBox" Watermark="1-1000" Width="80"/>
+          <CheckBox x:Name="CommonPortsOnlyChk" Content="Common ports only" IsChecked="True"/>
+        </StackPanel>
+        <TextBox x:Name="NetworkResultsTextBox" IsReadOnly="True" Height="100" 
+                 FontFamily="Consolas" AcceptsReturn="True"/>
+      </StackPanel>
+    </Expander>
+    
+    <Expander Header="Web Challenge Tools">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Web Exploitation:" FontWeight="SemiBold"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBox x:Name="WebTargetUrlTextBox" Watermark="http://challenge.ctf.com" Width="300"/>
+          <Button x:Name="DirectoryBruteforceBtn" Content="Directory Scan" Width="120"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="SqlMapTestBtn" Content="SQL Injection Test" Width="140"/>
+          <Button x:Name="XssTestBtn" Content="XSS Test" Width="80"/>
+          <Button x:Name="CookieAnalysisBtn" Content="Cookie Analysis" Width="120"/>
+        </StackPanel>
+        <TextBox x:Name="WebResultsTextBox" IsReadOnly="True" Height="100" 
+                 FontFamily="Consolas" AcceptsReturn="True"/>
+      </StackPanel>
+    </Expander>
+  </StackPanel>
+</UserControl>

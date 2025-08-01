@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="screenshareav.Views.ApiTestingView">
+  <StackPanel Margin="32" Spacing="12">
+    <TextBlock Text="API Testing Tools" FontWeight="Bold" FontSize="18"/>
+    
+    <Expander Header="REST API Client" IsExpanded="True">
+      <StackPanel Spacing="8">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <ComboBox x:Name="HttpMethodCombo" Width="80" SelectedIndex="0">
+            <ComboBoxItem Content="GET"/>
+            <ComboBoxItem Content="POST"/>
+            <ComboBoxItem Content="PUT"/>
+            <ComboBoxItem Content="DELETE"/>
+            <ComboBoxItem Content="PATCH"/>
+            <ComboBoxItem Content="HEAD"/>
+            <ComboBoxItem Content="OPTIONS"/>
+          </ComboBox>
+          <TextBox x:Name="UrlTextBox" Watermark="https://api.example.com/endpoint" Width="400"/>
+          <Button x:Name="SendRequestBtn" Content="Send" Width="80"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Headers:" Width="60" VerticalAlignment="Top" Margin="0,8,0,0"/>
+          <TextBox x:Name="HeadersTextBox" Watermark="Authorization: Bearer token, Content-Type: application/json" 
+                   Width="400" Height="60" AcceptsReturn="True"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Body:" Width="60" VerticalAlignment="Top" Margin="0,8,0,0"/>
+          <TextBox x:Name="RequestBodyTextBox" Watermark="Request body (JSON, XML, etc.)" 
+                   Width="400" Height="100" AcceptsReturn="True" FontFamily="Consolas"/>
+        </StackPanel>
+        
+        <TextBlock Text="Response:" FontWeight="SemiBold"/>
+        <ScrollViewer Height="200">
+          <TextBox x:Name="ResponseTextBox" IsReadOnly="True" AcceptsReturn="True" 
+                   FontFamily="Consolas" FontSize="12" Background="#f8f8f8"/>
+        </ScrollViewer>
+      </StackPanel>
+    </Expander>
+    
+    <Expander Header="API Security Testing">
+      <StackPanel Spacing="8">
+        <CheckBox x:Name="SqlInjectionTestChk" Content="Test for SQL Injection vulnerabilities"/>
+        <CheckBox x:Name="XssTestChk" Content="Test for XSS vulnerabilities"/>
+        <CheckBox x:Name="AuthBypassTestChk" Content="Test authentication bypass"/>
+        <CheckBox x:Name="RateLimitTestChk" Content="Test rate limiting"/>
+        <Button x:Name="RunSecurityTestsBtn" Content="Run Security Tests" Width="150"/>
+        <TextBox x:Name="SecurityTestResultsTextBox" IsReadOnly="True" Height="120" 
+                 FontFamily="Consolas" AcceptsReturn="True"/>
+      </StackPanel>
+    </Expander>
+    
+    <Expander Header="Load Testing">
+      <StackPanel Spacing="8">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Concurrent Requests:" Width="130"/>
+          <NumericUpDown x:Name="ConcurrentRequestsNum" Value="10" Minimum="1" Maximum="100" Width="80"/>
+          <TextBlock Text="Duration (seconds):" Width="120"/>
+          <NumericUpDown x:Name="DurationNum" Value="30" Minimum="1" Maximum="300" Width="80"/>
+        </StackPanel>
+        <Button x:Name="StartLoadTestBtn" Content="Start Load Test" Width="120"/>
+        <TextBox x:Name="LoadTestResultsTextBox" IsReadOnly="True" Height="80" 
+                 FontFamily="Consolas" AcceptsReturn="True"/>
+      </StackPanel>
+    </Expander>
+  </StackPanel>
+</UserControl>

@@ -2,12 +2,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="screenshareav.Views.HexEditorView">
   <StackPanel Margin="32" Spacing="12">
-    <TextBlock Text="Hex Editor" FontWeight="Bold" FontSize="18"/>
+    <TextBlock Text="Hex Editor &amp; Binary Analysis" FontWeight="Bold" FontSize="18"/>
     <StackPanel Orientation="Horizontal" Spacing="8">
       <TextBox x:Name="FilePathTextBox" Watermark="File Path" Width="300"/>
       <Button x:Name="OpenBtn" Content="Open" Width="80"/>
+      <Button x:Name="SaveBtn" Content="Save Changes" Width="120"/>
     </StackPanel>
-    <TextBox x:Name="HexTextBox" AcceptsReturn="True" FontFamily="Consolas" FontSize="14" Height="400"/>
-    <Button x:Name="SaveBtn" Content="Save Changes" Width="120"/>
+    
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <Button x:Name="FindStringBtn" Content="Find String" Width="100"/>
+      <Button x:Name="FindHexBtn" Content="Find Hex" Width="80"/>
+      <Button x:Name="ExtractStringsBtn" Content="Extract Strings" Width="120"/>
+      <Button x:Name="FileHeaderBtn" Content="File Header Analysis" Width="140"/>
+    </StackPanel>
+    
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <TextBox x:Name="SearchTextBox" Watermark="Search for..." Width="200"/>
+      <Button x:Name="SearchBtn" Content="Search" Width="80"/>
+      <TextBlock x:Name="SearchResultsText" Text=""/>
+    </StackPanel>
+    
+    <TextBox x:Name="HexTextBox" AcceptsReturn="True" FontFamily="Consolas" FontSize="14" Height="300"/>
+    
+    <Expander Header="Binary Analysis Tools">
+      <StackPanel Spacing="8">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="EntropyAnalysisBtn" Content="Entropy Analysis" Width="130"/>
+          <Button x:Name="FileTypeDetectionBtn" Content="File Type Detection" Width="140"/>
+          <Button x:Name="MetadataExtractionBtn" Content="Extract Metadata" Width="130"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="ChecksumBtn" Content="Calculate Checksums" Width="140"/>
+          <Button x:Name="SteganographyBtn" Content="Stego Analysis" Width="120"/>
+          <Button x:Name="XorAnalysisBtn" Content="XOR Analysis" Width="110"/>
+        </StackPanel>
+        <TextBox x:Name="AnalysisResultsTextBox" IsReadOnly="True" Height="100" 
+                 FontFamily="Consolas" AcceptsReturn="True"/>
+      </StackPanel>
+    </Expander>
   </StackPanel>
 </UserControl>

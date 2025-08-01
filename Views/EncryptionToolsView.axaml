@@ -3,35 +3,93 @@
              x:Class="screenshareav.Views.EncryptionToolsView">
   <StackPanel Margin="32" Spacing="12">
     <TextBlock Text="Encryption Tools" FontWeight="Bold" FontSize="18"/>
-    <TextBlock Text="Encryption" FontStyle="Italic"/>
+    <TextBlock Text="Cryptography &amp; Security Analysis" FontStyle="Italic"/>
+    
     <Expander Header="JWT Token Decoder">
       <StackPanel>
         <TextBox x:Name="JwtInput" Watermark="Paste JWT token here..." AcceptsReturn="True" Height="60"/>
-        <Button x:Name="DecodeJwtBtn" Content="Decode" Width="100"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="DecodeJwtBtn" Content="Decode" Width="100"/>
+          <Button x:Name="ValidateJwtBtn" Content="Validate" Width="100"/>
+          <Button x:Name="CrackJwtBtn" Content="Crack Weak JWT" Width="120"/>
+        </StackPanel>
         <TextBlock x:Name="JwtDecoded" TextWrapping="Wrap"/>
       </StackPanel>
     </Expander>
-    <Expander Header="Hash Generator (SHA256, MD5, etc)">
+    
+    <Expander Header="Hash Generator &amp; Cracker">
       <StackPanel>
         <TextBox x:Name="HashInput" Watermark="Enter text..."/>
-        <ComboBox x:Name="HashAlgoCombo" Width="120">
-          <ComboBoxItem Content="SHA256"/>
-          <ComboBoxItem Content="MD5"/>
-        </ComboBox>
-        <Button x:Name="HashBtn" Content="Hash" Width="80"/>
-        <TextBlock x:Name="HashResult"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <ComboBox x:Name="HashAlgoCombo" Width="120">
+            <ComboBoxItem Content="SHA256"/>
+            <ComboBoxItem Content="SHA1"/>
+            <ComboBoxItem Content="MD5"/>
+            <ComboBoxItem Content="SHA512"/>
+            <ComboBoxItem Content="NTLM"/>
+          </ComboBox>
+          <Button x:Name="HashBtn" Content="Hash" Width="80"/>
+          <Button x:Name="CrackHashBtn" Content="Dictionary Attack" Width="130"/>
+        </StackPanel>
+        <TextBox x:Name="HashResult"/>
+        <TextBox x:Name="DictionaryPathTextBox" Watermark="Dictionary file path..." Width="300"/>
       </StackPanel>
     </Expander>
+    
     <Expander Header="Encryption/Decryption (AES, XOR, etc)">
       <StackPanel>
         <TextBox x:Name="EncryptInput" Watermark="Enter text..."/>
         <TextBox x:Name="EncryptKey" Watermark="Key..."/>
-        <Button x:Name="AesEncryptBtn" Content="AES Encrypt" Width="120"/>
-        <Button x:Name="AesDecryptBtn" Content="AES Decrypt" Width="120"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <ComboBox x:Name="EncryptionModeCombo" Width="100" SelectedIndex="0">
+            <ComboBoxItem Content="AES"/>
+            <ComboBoxItem Content="XOR"/>
+            <ComboBoxItem Content="DES"/>
+            <ComboBoxItem Content="3DES"/>
+          </ComboBox>
+          <Button x:Name="AesEncryptBtn" Content="Encrypt" Width="80"/>
+          <Button x:Name="AesDecryptBtn" Content="Decrypt" Width="80"/>
+          <Button x:Name="BruteForceKeyBtn" Content="Brute Force" Width="100"/>
+        </StackPanel>
         <TextBlock x:Name="EncryptResult"/>
       </StackPanel>
     </Expander>
+    
+    <Expander Header="Password Security Tools">
+      <StackPanel>
+        <TextBox x:Name="PasswordInput" Watermark="Enter password to analyze..."/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="AnalyzePasswordBtn" Content="Analyze Strength" Width="130"/>
+          <Button x:Name="GeneratePasswordBtn" Content="Generate Secure" Width="130"/>
+          <Button x:Name="PasswordCrackBtn" Content="Time to Crack" Width="120"/>
+        </StackPanel>
+        <TextBlock x:Name="PasswordAnalysisResult" TextWrapping="Wrap"/>
+        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+          <CheckBox x:Name="IncludeSymbolsChk" Content="Symbols" IsChecked="True"/>
+          <CheckBox x:Name="IncludeNumbersChk" Content="Numbers" IsChecked="True"/>
+          <CheckBox x:Name="IncludeUpperChk" Content="Uppercase" IsChecked="True"/>
+          <NumericUpDown x:Name="PasswordLengthNum" Value="16" Minimum="8" Maximum="128" Width="80"/>
+        </StackPanel>
+      </StackPanel>
+    </Expander>
+    
+    <Expander Header="Steganography Tools">
+      <StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBox x:Name="StegoImagePathTextBox" Watermark="Image file path..." Width="250"/>
+          <Button x:Name="BrowseStegoImageBtn" Content="Browse" Width="80"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="ExtractHiddenDataBtn" Content="Extract Hidden Data" Width="140"/>
+          <Button x:Name="HideDataBtn" Content="Hide Data" Width="100"/>
+          <Button x:Name="AnalyzeStegoBtn" Content="Stego Analysis" Width="120"/>
+        </StackPanel>
+        <TextBox x:Name="StegoDataTextBox" Watermark="Data to hide or extracted data..." Height="60" AcceptsReturn="True"/>
+        <TextBox x:Name="StegoResultTextBox" IsReadOnly="True" Height="60" AcceptsReturn="True"/>
+      </StackPanel>
+    </Expander>
+    
     <TextBlock Text="Descriptions and best practices for JWT, hashing, and encryption are shown in tooltips and below." Margin="0,16,0,0"/>
-    <TextBlock Text="- JWT: JSON Web Tokens are used for stateless authentication. Header.Payload.Signature.\n- Hashing: One-way, for integrity.\n- Encryption: Two-way, for confidentiality."/>
+    <TextBlock Text="- JWT: JSON Web Tokens are used for stateless authentication. Header.Payload.Signature.\n- Hashing: One-way, for integrity.\n- Encryption: Two-way, for confidentiality.\n- Always use strong, unique passwords and enable 2FA when possible.\n- Be aware of common attack vectors like rainbow tables, dictionary attacks, and timing attacks."/>
   </StackPanel>
 </UserControl>
