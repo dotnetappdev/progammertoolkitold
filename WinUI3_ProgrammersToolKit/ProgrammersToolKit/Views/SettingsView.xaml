@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="ProgrammersToolKit.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ScrollViewer>
+        <StackPanel Margin="32" Spacing="16">
+            <TextBlock Text="Settings" FontWeight="Bold" FontSize="18"/>
+            <Button Content="Reset to Defaults" Width="180" HorizontalAlignment="Left"/>
+            
+            <StackPanel Spacing="8">
+                <TextBlock Text="Application Settings" FontWeight="SemiBold"/>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="Theme:" VerticalAlignment="Center"/>
+                    <ComboBox Width="120">
+                        <ComboBoxItem Content="System Default"/>
+                        <ComboBoxItem Content="Light"/>
+                        <ComboBoxItem Content="Dark"/>
+                    </ComboBox>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="Auto-save notes:" VerticalAlignment="Center"/>
+                    <ToggleSwitch/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

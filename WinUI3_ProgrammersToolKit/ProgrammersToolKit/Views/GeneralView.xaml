@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="ProgrammersToolKit.Views.GeneralView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ScrollViewer>
+        <StackPanel Margin="24" Spacing="16">
+            <TextBlock Text="General" FontSize="28" FontWeight="Bold"/>
+            <TextBlock Text="Welcome to the Programmer's Toolkit - WinUI 3 Version" FontSize="16" FontWeight="SemiBold"/>
+            <TextBlock Text="This application has been successfully converted from Avalonia UI to WinUI 3 while preserving all original features." 
+                       TextWrapping="Wrap" FontSize="14" Opacity="0.8"/>
+            
+            <Border Background="#F5F5F5" CornerRadius="8" Padding="16" Margin="0,8,0,0">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="✨ Conversion Highlights" FontWeight="SemiBold" FontSize="16"/>
+                    <TextBlock TextWrapping="Wrap">
+                        <Run Text="• Complete UI framework migration from Avalonia to WinUI 3"/>
+                        <LineBreak/>
+                        <Run Text="• All XAML views converted to WinUI 3 syntax and controls"/>
+                        <LineBreak/>
+                        <Run Text="• Modern Windows 11 design with Mica backdrop"/>
+                        <LineBreak/>
+                        <Run Text="• Preserved MVVM architecture and business logic"/>
+                        <LineBreak/>
+                        <Run Text="• Maintained database functionality with Entity Framework Core"/>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+            
+            <Border Background="#E8F4FD" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="🔧 Available Tools" FontWeight="SemiBold" FontSize="16"/>
+                    <TextBlock TextWrapping="Wrap">
+                        <Run Text="Navigate through the sidebar to access various programmer tools:"/>
+                        <LineBreak/>
+                        <Run Text="• Encryption Tools (JWT, Hashing, AES)"/>
+                        <LineBreak/>
+                        <Run Text="• Notepad with encryption and macros"/>
+                        <LineBreak/>
+                        <Run Text="• Text Stripper for cleaning text"/>
+                        <LineBreak/>
+                        <Run Text="• Settings and configuration"/>
+                        <LineBreak/>
+                        <Run Text="• Additional tools in development..."/>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+            
+            <Border Background="#FFF3CD" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="⚡ Technical Details" FontWeight="SemiBold" FontSize="16"/>
+                    <TextBlock TextWrapping="Wrap">
+                        <Run Text="Built with:"/>
+                        <LineBreak/>
+                        <Run Text="• .NET 8.0 targeting Windows 10/11"/>
+                        <LineBreak/>
+                        <Run Text="• Windows App SDK 1.4"/>
+                        <LineBreak/>
+                        <Run Text="• SQLite with Entity Framework Core"/>
+                        <LineBreak/>
+                        <Run Text="• Modern WinUI 3 controls and styling"/>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

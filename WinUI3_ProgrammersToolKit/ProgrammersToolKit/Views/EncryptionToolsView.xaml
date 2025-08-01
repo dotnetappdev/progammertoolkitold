@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="ProgrammersToolKit.Views.EncryptionToolsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ScrollViewer>
+        <StackPanel Margin="32" Spacing="12">
+            <TextBlock Text="Encryption Tools" FontWeight="Bold" FontSize="18"/>
+            <TextBlock Text="Encryption" FontStyle="Italic"/>
+            
+            <Expander Header="JWT Token Decoder">
+                <StackPanel Spacing="8" Margin="0,8,0,0">
+                    <TextBox x:Name="JwtInput" PlaceholderText="Paste JWT token here..." AcceptsReturn="True" Height="60"/>
+                    <Button x:Name="DecodeJwtBtn" Content="Decode" Width="100" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="JwtDecoded" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Expander>
+            
+            <Expander Header="Hash Generator (SHA256, MD5, etc)">
+                <StackPanel Spacing="8" Margin="0,8,0,0">
+                    <TextBox x:Name="HashInput" PlaceholderText="Enter text..."/>
+                    <ComboBox x:Name="HashAlgoCombo" Width="120" HorizontalAlignment="Left">
+                        <ComboBoxItem Content="SHA256"/>
+                        <ComboBoxItem Content="MD5"/>
+                    </ComboBox>
+                    <Button x:Name="HashBtn" Content="Hash" Width="80" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="HashResult"/>
+                </StackPanel>
+            </Expander>
+            
+            <Expander Header="Encryption/Decryption (AES, XOR, etc)">
+                <StackPanel Spacing="8" Margin="0,8,0,0">
+                    <TextBox x:Name="EncryptInput" PlaceholderText="Enter text..."/>
+                    <TextBox x:Name="EncryptKey" PlaceholderText="Key..."/>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Name="AesEncryptBtn" Content="AES Encrypt" Width="120"/>
+                        <Button x:Name="AesDecryptBtn" Content="AES Decrypt" Width="120"/>
+                    </StackPanel>
+                    <TextBlock x:Name="EncryptResult"/>
+                </StackPanel>
+            </Expander>
+            
+            <TextBlock Text="Descriptions and best practices for JWT, hashing, and encryption are shown in tooltips and below." 
+                       Margin="0,16,0,0"/>
+            <TextBlock>
+                <Run Text="- JWT: JSON Web Tokens are used for stateless authentication. Header.Payload.Signature."/>
+                <LineBreak/>
+                <Run Text="- Hashing: One-way, for integrity."/>
+                <LineBreak/>
+                <Run Text="- Encryption: Two-way, for confidentiality."/>
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
